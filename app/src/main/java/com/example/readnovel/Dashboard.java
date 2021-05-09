@@ -18,7 +18,7 @@ public class Dashboard extends AppCompatActivity {
         String name = i.getStringExtra("email");
 
         //Display text
-        text.setText("Welcome to " + name);;;
+        text.setText("Welcome to " + name);
 
     }
 }
