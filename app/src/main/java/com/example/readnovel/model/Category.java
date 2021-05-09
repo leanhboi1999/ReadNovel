@@ -1,14 +1,14 @@
-package com.example.readnovel.Model;
+package com.example.readnovel.model;
 
 public class Category {
     private String urlBook;
-    private String thumbalt;
+    private String thumb;
     private String name;
     private String content;
 
-    public Category(String urlBook, String thumbalt, String name, String content) {
+    public Category(String urlBook, String thumb, String name, String content) {
         this.urlBook = urlBook;
-        this.thumbalt = thumbalt;
+        this.thumb = thumb;
         this.name = name;
         this.content = content;
     }
@@ -21,12 +21,12 @@ public class Category {
         this.urlBook = urlBook;
     }
 
-    public String getThumbalt() {
-        return thumbalt;
+    public String getThumb() {
+        return thumb;
     }
 
-    public void setThumbalt(String thumbalt) {
-        this.thumbalt = thumbalt;
+    public void setThumb(String thumb) {
+        this.thumb = thumb;
     }
 
     public String getName() {
