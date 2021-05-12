@@ -1,5 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <dimen name="activity_padding">16dp</dimen>
+    <dimen name="placeholder_image">50dp</dimen>
+    <dimen name="placeholder_text_height">8dp</dimen>
+
+    <dimen name="margin">8dp</dimen>
+    <dimen name="padding">16dp</dimen>
+    <dimen name="border_card">4dp</dimen>
+    <dimen name="border_right">20dp</dimen>
+    <dimen name="text_hint">12sp</dimen>
+    <dimen name="text_normal">14sp</dimen>
+    <dimen name="text_header">16sp</dimen>
+
+    <dimen name="max_height_button">65dp</dimen>
+    <dimen name="min_height_button">55dp</dimen>
     <dimen name="dimens_1dp">1dp</dimen>
     <dimen name="dimens_2dp">2dp</dimen>
     <dimen name="dimens_4dp">4dp</dimen>
