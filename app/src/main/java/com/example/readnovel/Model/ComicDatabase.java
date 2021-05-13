@@ -1,21 +1,21 @@
-package com.example.readnovel.Model;
+package com.example.readnovel.model;
 
 import io.realm.RealmObject;
 
 public class ComicDatabase extends RealmObject {
     private String name;
     private String url;
-    private String thumbal;
+    private String thumb;
     private String chapter;
     private String view;
 
     public ComicDatabase() {
     }
 
-    public ComicDatabase(String name, String url, String thumbal, String chapter, String view) {
+    public ComicDatabase(String name, String url, String thumb, String chapter, String view) {
         this.name = name;
         this.url = url;
-        this.thumbal = thumbal;
+        this.thumb = thumb;
         this.chapter = chapter;
         this.view = view;
     }
@@ -36,12 +36,12 @@ public class ComicDatabase extends RealmObject {
         this.url = url;
     }
 
-    public String getThumbal() {
-        return thumbal;
+    public String getThumb() {
+        return thumb;
     }
 
-    public void setThumbal(String thumb) {
-        this.thumbal = thumb;
+    public void setThumb(String thumb) {
+        this.thumb = thumb;
     }
 
     public String getChapter() {

@@ -1,16 +1,16 @@
-package com.example.readnovel.Model;
+package com.example.readnovel.model;
 
 public class Comic {
     private String name;
     private String view;
-    private String thumbal;
+    private String thumb;
     private String chapter;
     private String linkComic;
 
-    public Comic(String name, String view, String thumbal, String chapter, String linkComic) {
+    public Comic(String name, String view, String thumb, String chapter, String linkComic) {
         this.name = name;
         this.view = view;
-        this.thumbal = thumbal;
+        this.thumb = thumb;
         this.chapter = chapter;
         this.linkComic = linkComic;
     }
@@ -31,12 +31,12 @@ public class Comic {
         this.view = view;
     }
 
-    public String getThumbal() {
-        return thumbal;
+    public String getThumb() {
+        return thumb;
     }
 
-    public void setThumbal(String thumbal) {
-        this.thumbal = thumbal;
+    public void setThumb(String thumb) {
+        this.thumb = thumb;
     }
 
     public String getChapter() {
