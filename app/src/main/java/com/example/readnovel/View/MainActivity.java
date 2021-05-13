@@ -13,9 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-
 import com.example.readnovel.R;
-//import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     TextView text_first;
@@ -68,11 +66,5 @@ public class MainActivity extends AppCompatActivity {
         i.putExtra("email", username_text);
         i.putExtra("password", password_text);
         startActivity(i);
-
-        //Creating a message toast
-        //Toast.makeText(this, "Button is clicked", Toast.LENGTH_LONG).show();
-
-        //Change image when click button
-        //image.setImageResource(R.drawable.nameImage);
     }
 }

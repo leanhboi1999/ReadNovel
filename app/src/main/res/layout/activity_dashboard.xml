@@ -10,19 +10,21 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:clipToPadding="false"
         android:fillViewport="true">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:background="@android:color/transparent"
+            android:orientation="vertical">
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/margin"
                 app:cardCornerRadius="@dimen/border_card"
-                app:cardElevation="@dimen/border_card" >
+                app:cardElevation="@dimen/border_card">
 
                 <AutoCompleteTextView
                     android:id="@+id/searchAuto"
@@ -31,7 +33,311 @@
                     android:layout_weight="1"
                     android:background="@android:color/transparent"
                     android:cursorVisible="true"
-                    android:text="AutoCompleteTextView" />
+                    android:drawableEnd="@drawable/outline_search_black_36dp"
+                    android:drawableTint="@color/material2"
+                    android:fontFamily="@font/roboto_medium"
+                    android:hint="@string/findcomic"
+                    android:padding="@dimen/dimens_16dp"
+                    android:textColor="@color/material2"
+                    android:textColorHint="@color/material3"
+                    android:textSize="@dimen/size_14sp">
+
+                    <requestFocus />
+                </AutoCompleteTextView>
+            </androidx.cardview.widget.CardView>
+
+            <ss.com.bannerslider.views.BannerSlider
+                android:id="@+id/banner_slider"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_marginLeft="@dimen/margin"
+                android:layout_marginRight="@dimen/margin"
+                android:layout_marginBottom="@dimen/margin"
+                app:animateIndicators="true"
+                app:defaultBanner="1"
+                app:indicatorSize="18dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin"
+                android:layout_marginRight="@dimen/margin"
+                android:layout_marginBottom="@dimen/margin"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btn_TheLoai"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/min_height_button"
+                    android:layout_marginStart="@dimen/margin"
+                    android:layout_weight="1"
+                    android:background="@drawable/button_click"
+                    android:fontFamily="@font/roboto_bold"
+                    android:text="@string/kindcomic"
+                    android:textAllCaps="false"
+                    android:textColor="#FFF"
+                    android:textSize="@dimen/text_normal" />
+
+                <Button
+                    android:id="@+id/btn_BXH"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/max_height_button"
+                    android:layout_marginStart="@dimen/margin"
+                    android:layout_weight="1"
+                    android:background="@drawable/button_click"
+                    android:fontFamily="@font/roboto_bold"
+                    android:text="@string/ratings"
+                    android:textAllCaps="false"
+                    android:textColor="#FFF"
+                    android:textSize="@dimen/text_header" />
+
+                <Button
+                    android:id="@+id/btn_Favorite"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/min_height_button"
+                    android:layout_marginLeft="@dimen/margin"
+                    android:layout_marginRight="@dimen/margin"
+                    android:layout_weight="1"
+                    android:background="@drawable/button_click"
+                    android:fontFamily="@font/roboto_bold"
+                    android:text="@string/favorite"
+                    android:textAllCaps="false"
+                    android:textColor="#FFF"
+                    android:textSize="@dimen/text_normal" />
+            </LinearLayout>
+            <!-- Truyện mới -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin"
+                android:layout_marginRight="@dimen/margin"
+                android:layout_marginBottom="@dimen/margin"
+                app:cardCornerRadius="@dimen/border_card"
+                app:cardElevation="@dimen/border_card">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:paddingStart="@dimen/margin"
+                        android:paddingEnd="@dimen/margin">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/roboto_regular"
+                            android:text="@string/truyenmoi"
+                            android:textColor="@color/black"
+                            android:textSize="16sp" />
+
+                        <Button
+                            android:id="@+id/btn_newCommic"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@android:color/transparent"
+                            android:fontFamily="@font/roboto_medium"
+                            android:text="@string/more"
+                            android:textAllCaps="false"
+                            android:textColor="@color/material1"
+                            android:textSize="@dimen/text_hint" />
+                    </LinearLayout>
+
+                    <com.todkars.shimmer.ShimmerRecyclerView
+                        android:id="@+id/rv_HotTrend"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="4dp"
+                        app:shimmer_demo_angle="20"
+                        app:shimmer_demo_child_count="1"
+                        app:shimmer_demo_layout="@layout/row_shimmer"
+                        app:shimmer_demo_layout_manager_type="linear_vertical"
+                        app:shimmer_demo_shimmer_color="@color/background" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Truyện hot -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin"
+                android:layout_marginRight="@dimen/margin"
+                android:layout_marginBottom="@dimen/margin"
+                app:cardCornerRadius="@dimen/border_card"
+                app:cardElevation="@dimen/border_card">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <!--Mới cập nhật-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:paddingStart="@dimen/margin"
+                        android:paddingEnd="@dimen/margin">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/roboto_regular"
+                            android:text="@string/truyenhot"
+                            android:textColor="@color/black"
+                            android:textSize="16sp" />
+
+                        <Button
+                            android:id="@+id/btn_hotCommic"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@android:color/transparent"
+                            android:fontFamily="@font/roboto_medium"
+                            android:text="@string/more"
+                            android:textAllCaps="false"
+                            android:textColor="@color/material1"
+                            android:textSize="@dimen/text_hint" />
+                    </LinearLayout>
+
+                    <com.todkars.shimmer.ShimmerRecyclerView xmlns:app="http://schemas.android.com/apk/res-auto"
+                        android:id="@+id/HotTrend"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="4dp"
+                        app:shimmer_demo_angle="20"
+                        app:shimmer_demo_child_count="1"
+                        app:shimmer_demo_layout="@layout/row_shimmer"
+                        app:shimmer_demo_layout_manager_type="linear_vertical"
+                        app:shimmer_demo_shimmer_color="@color/background" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Truyện con gái -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin"
+                android:layout_marginRight="@dimen/margin"
+                android:layout_marginBottom="@dimen/margin"
+                app:cardCornerRadius="@dimen/border_card"
+                app:cardElevation="@dimen/border_card">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <!-- View new update -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:paddingStart="@dimen/margin"
+                        android:paddingEnd="@dimen/margin">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/roboto_regular"
+                            android:text="@string/truyencongai"
+                            android:textColor="@color/black"
+                            android:textSize="16sp" />
+
+                        <Button
+                            android:id="@+id/btn_truyenCG"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@android:color/transparent"
+                            android:fontFamily="@font/roboto_medium"
+                            android:text="@string/more"
+                            android:textAllCaps="false"
+                            android:textColor="@color/material1"
+                            android:textSize="@dimen/text_hint" />
+                    </LinearLayout>
+
+                    <com.todkars.shimmer.ShimmerRecyclerView
+                        android:id="@+id/rv_Girl"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="4dp"
+                        app:shimmer_demo_angle="20"
+                        app:shimmer_demo_child_count="1"
+                        app:shimmer_demo_layout="@layout/row_shimmer"
+                        app:shimmer_demo_layout_manager_type="linear_vertical"
+                        app:shimmer_demo_shimmer_color="@color/background" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Truyện con trai -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin"
+                android:layout_marginRight="@dimen/margin"
+                android:layout_marginBottom="@dimen/margin"
+                app:cardCornerRadius="@dimen/border_card"
+                app:cardElevation="@dimen/border_card">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <!-- View new update -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:paddingStart="@dimen/margin"
+                        android:paddingEnd="@dimen/margin">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/roboto_regular"
+                            android:text="@string/truyencontrai"
+                            android:textColor="@color/black"
+                            android:textSize="16sp" />
+
+                        <Button
+                            android:id="@+id/btn_truyenCT"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@android:color/transparent"
+                            android:fontFamily="@font/roboto_medium"
+                            android:text="@string/more"
+                            android:textAllCaps="false"
+                            android:textColor="@color/material1"
+                            android:textSize="@dimen/text_hint" />
+                    </LinearLayout>
+
+                    <com.todkars.shimmer.ShimmerRecyclerView
+                        android:id="@+id/rv_Boy"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+
+                        app:shimmer_demo_angle="20"
+                        app:shimmer_demo_child_count="1"
+                        app:shimmer_demo_layout="@layout/row_shimmer"
+                        app:shimmer_demo_layout_manager_type="linear_vertical"
+                        app:shimmer_demo_shimmer_color="@color/background" />
+                </LinearLayout>
             </androidx.cardview.widget.CardView>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

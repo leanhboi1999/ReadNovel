@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">ReadNovel</string>
+    <string name="findcomic">Tìm kiếm truyện</string>
+    <string name="kindcomic">Thể loại</string>
+    <string name="ratings">Rating</string>
+    <string name="favorite">Yêu thích</string>
+    <string name="truyenmoi">Truyện mới</string>
+    <string name="more">Load more</string>
+    <string name="truyenhot">Truyện hot</string>
+    <string name="truyencongai">Truyện con gái</string>
+    <string name="truyencontrai">Truyện con trai</string>
 </resources>
