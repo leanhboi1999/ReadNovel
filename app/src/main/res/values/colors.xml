@@ -1,15 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- For theme default -->
-    <drawable name="screen_background_light">#FFFFFF</drawable>
-    <drawable name="screen_background_dark">#FF000000</drawable>
-    <drawable name="status_bar_closed_default_background">#FF000000</drawable>
-    <!-- for background dark UI -->
-    <drawable name="screen_background_dark_transparent">#800000</drawable>
-    <!-- for background default light UI -->
-    <drawable name="screen_background_light_transparent">#80ffffff</drawable>
-    <!-- for color UI -->
-    <color name="transparent">#000000</color>
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>
