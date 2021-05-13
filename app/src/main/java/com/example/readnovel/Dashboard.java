@@ -1,12 +1,10 @@
-package com.example.readnovel.View;
+package com.example.readnovel;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
-
-import com.example.readnovel.R;
 
 public class Dashboard extends AppCompatActivity {
     TextView text;

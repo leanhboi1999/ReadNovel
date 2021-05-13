@@ -1,4 +1,4 @@
-package com.example.readnovel.View;
+package com.example.readnovel;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -8,13 +8,12 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-
-import com.example.readnovel.R;
 //import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
@@ -46,9 +45,9 @@ public class MainActivity extends AppCompatActivity {
 
         //Load image
         //image = findViewById(R.id.Image);
+
         button_first = findViewById(R.id.button_first);
-        button_second = findViewById(R.id.button_first);
-        button_second.setOnClickListener(new View.OnClickListener() {
+        button_first.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 login(view);
