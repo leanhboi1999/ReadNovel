@@ -13,6 +13,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.example.readnovel.R;
 
 public class MainActivity extends AppCompatActivity {
@@ -45,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
         //Load image
         //image = findViewById(R.id.Image);
         button_first = findViewById(R.id.button_first);
-        button_second = findViewById(R.id.button_first);
+        button_second = findViewById(R.id.button_second);
         button_second.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -62,9 +64,11 @@ public class MainActivity extends AppCompatActivity {
         username_text = username.getText().toString();
         password_text = password.getText().toString();
 
-        Intent i = new Intent(this, Dashboard.class);
+        Intent i = new Intent(MainActivity.this, Dashboard.class);
         i.putExtra("email", username_text);
         i.putExtra("password", password_text);
         startActivity(i);
+
     }
+
 }
