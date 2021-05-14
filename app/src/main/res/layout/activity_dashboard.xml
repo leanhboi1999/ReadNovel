@@ -154,7 +154,7 @@
                     </LinearLayout>
 
                     <com.todkars.shimmer.ShimmerRecyclerView
-                        android:id="@+id/rv_HotTrend"
+                        android:id="@+id/NewUpdate"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_margin="4dp"
@@ -270,7 +270,7 @@
                     </LinearLayout>
 
                     <com.todkars.shimmer.ShimmerRecyclerView
-                        android:id="@+id/rv_Girl"
+                        android:id="@+id/Girl"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_margin="4dp"
@@ -328,7 +328,7 @@
                     </LinearLayout>
 
                     <com.todkars.shimmer.ShimmerRecyclerView
-                        android:id="@+id/rv_Boy"
+                        android:id="@+id/Boy"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
 

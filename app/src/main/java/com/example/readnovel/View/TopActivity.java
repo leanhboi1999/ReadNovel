@@ -6,11 +6,8 @@ import android.widget.AutoCompleteTextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
-import com.example.readnovel.Model.Search;
 import com.example.readnovel.R;
 import com.google.android.material.tabs.TabLayout;
-
-import java.util.ArrayList;
 
 public class TopActivity extends AppCompatActivity {
     private TabLayout tabLayout;
@@ -30,6 +27,5 @@ public class TopActivity extends AppCompatActivity {
         tabLayout.addTab(tabLayout.newTab().setText("Ngày"));
         tabLayout.addTab(tabLayout.newTab().setText("Tuần"));
         tabLayout.addTab(tabLayout.newTab().setText("Tháng"));
-
     }
 }

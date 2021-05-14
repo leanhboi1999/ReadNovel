@@ -13,7 +13,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.readnovel.R;
 
@@ -61,12 +60,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void login(View view) {
-        username_text = username.getText().toString();
-        password_text = password.getText().toString();
+        /*username_text = username.getText().toString();
+        password_text = password.getText().toString();*/
 
-        Intent i = new Intent(MainActivity.this, Dashboard.class);
-        i.putExtra("email", username_text);
-        i.putExtra("password", password_text);
+        Intent i = new Intent(this, Dashboard.class);
         startActivity(i);
 
     }
