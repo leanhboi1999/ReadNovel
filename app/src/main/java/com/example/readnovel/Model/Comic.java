@@ -3,14 +3,14 @@ package com.example.readnovel.Model;
 public class Comic {
     private String name;
     private String view;
-    private String thumb;
+    private String thumbal;
     private String chapter;
     private String linkComic;
 
-    public Comic(String name, String view, String thumb, String chapter, String linkComic) {
+    public Comic(String name, String view, String thumbal, String chapter, String linkComic) {
         this.name = name;
         this.view = view;
-        this.thumb = thumb;
+        this.thumbal = thumbal;
         this.chapter = chapter;
         this.linkComic = linkComic;
     }
@@ -31,12 +31,12 @@ public class Comic {
         this.view = view;
     }
 
-    public String getThumb() {
-        return thumb;
+    public String getThumbal() {
+        return thumbal;
     }
 
-    public void setThumb(String thumb) {
-        this.thumb = thumb;
+    public void setThumbal(String thumbal) {
+        this.thumbal = thumbal;
     }
 
     public String getChapter() {
