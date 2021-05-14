@@ -9,6 +9,9 @@
     <string name="truyenhot">Truyện hot</string>
     <string name="truyencongai">Truyện con gái</string>
     <string name="truyencontrai">Truyện con trai</string>
-
+    <string name="chapterDemo">Chapter 1</string>
     <string name="findComic">Tìm kiếm truyện</string>
+    <string name="describeCoverStory">Show chapter</string>
+    <string name="viewChapter">120000</string>
+    <string name="nameComicDetail"></string>
 </resources>

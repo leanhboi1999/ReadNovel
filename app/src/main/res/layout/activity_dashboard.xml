@@ -67,7 +67,7 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:id="@+id/btn_TheLoai"
+                    android:id="@+id/btnTheLoai"
                     style="?android:attr/buttonBarButtonStyle"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/min_height_button"
@@ -81,7 +81,7 @@
                     android:textSize="@dimen/text_normal" />
 
                 <Button
-                    android:id="@+id/btn_BXH"
+                    android:id="@+id/btnBXH"
                     style="?android:attr/buttonBarButtonStyle"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/max_height_button"
@@ -95,7 +95,7 @@
                     android:textSize="@dimen/text_header" />
 
                 <Button
-                    android:id="@+id/btn_Favorite"
+                    android:id="@+id/btnFavorite"
                     style="?android:attr/buttonBarButtonStyle"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/min_height_button"
@@ -142,7 +142,7 @@
                             android:textSize="16sp" />
 
                         <Button
-                            android:id="@+id/btn_newCommic"
+                            android:id="@+id/btnNewUpdate"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:background="@android:color/transparent"
@@ -200,7 +200,7 @@
                             android:textSize="16sp" />
 
                         <Button
-                            android:id="@+id/btn_hotCommic"
+                            android:id="@+id/btnHotTrend"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:background="@android:color/transparent"
@@ -258,7 +258,7 @@
                             android:textSize="16sp" />
 
                         <Button
-                            android:id="@+id/btn_truyenCG"
+                            android:id="@+id/btnTruyenGirl"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:background="@android:color/transparent"
@@ -316,7 +316,7 @@
                             android:textSize="16sp" />
 
                         <Button
-                            android:id="@+id/btn_truyenCT"
+                            android:id="@+id/btnTruyenBoy"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:background="@android:color/transparent"
