@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+    <!--tools:context=".activity.PageComicActivity">-->
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        app:navigationIcon="@drawable/ic_arrow_back_black_24dp"
+        android:background="@color/material2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:background="@android:color/transparent"
+        app:cardCornerRadius="7dp"
+        app:cardElevation="7dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="200dp"
+                android:layout_margin="8dp"
+                android:layout_weight="2"
+                app:cardCornerRadius="10dp">
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@id/tv_View">
+
+                    <ImageView
+                        android:id="@+id/imgThumb"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:contentDescription="@string/describeImageView"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/cover_image" />
+
+                    <ImageButton
+                        android:id="@+id/btn_Like"
+                        android:layout_width="40dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom|end"
+                        android:layout_marginBottom="@dimen/margin"
+                        android:background="@drawable/like_click"
+                        android:baselineAlignBottom="true"
+                        android:contentDescription="@string/describeImageView"
+                        android:padding="8dp"
+                        android:src="@drawable/favorite" />
+                </FrameLayout>
+
+
+            </androidx.cardview.widget.CardView>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_weight="3"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvName"
+                    android:fontFamily="@font/roboto_bold"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:paddingLeft="@dimen/margin"
+                    android:paddingTop="@dimen/margin"
+                    android:paddingRight="@dimen/margin"
+                    android:text="@string/nameComic"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_header" />
+
+                <TextView
+                    android:id="@+id/tv_Update"
+                    android:fontFamily="@font/roboto_medium"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:gravity="center"
+                    android:text="@string/updateLast"
+                    android:textColor="@color/black"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/tvAuthor"
+                    android:fontFamily="@font/roboto_medium"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/margin"
+                    android:drawableStart="@drawable/icons_author"
+                    android:drawablePadding="@dimen/margin"
+                    android:paddingLeft="@dimen/margin"
+                    android:paddingRight="@dimen/margin"
+                    android:text="@string/update"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_normal" />
+
+                <TextView
+                    android:id="@+id/tv_kind"
+                    android:fontFamily="@font/roboto_medium"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/margin"
+                    android:drawableStart="@drawable/icons_trend"
+                    android:drawablePadding="@dimen/margin"
+                    android:paddingLeft="@dimen/margin"
+                    android:paddingRight="@dimen/margin"
+                    android:text="@string/update"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_normal" />
+
+                <TextView
+                    android:id="@+id/tv_status"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/margin"
+                    android:drawableStart="@drawable/icon_tag"
+                    android:drawablePadding="@dimen/margin"
+                    android:gravity="center|start"
+                    android:paddingLeft="@dimen/margin"
+                    android:paddingRight="@dimen/margin"
+                    android:text="@string/update"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_normal" />
+
+                <TextView
+                    android:id="@+id/tv_View"
+                    android:fontFamily="@font/roboto_medium"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/icons_follow"
+                    android:drawablePadding="@dimen/margin"
+                    android:paddingLeft="@dimen/margin"
+                    android:paddingRight="@dimen/margin"
+                    android:text="@string/update"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_normal" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:cardCornerRadius="7dp"
+        app:cardElevation="7dp">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:fontFamily="@font/roboto_bold"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_weight="1"
+                android:padding="8dp"
+                android:text="@string/categoryComic"
+                android:textColor="#000"
+                android:textSize="14sp" />
+
+            <Spinner
+                android:id="@+id/spinnerSort"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/background" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="8dp"
+        android:layout_weight="1"
+        app:cardCornerRadius="7dp"
+        app:cardElevation="7dp">
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/rvChapter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin" />
+    </androidx.cardview.widget.CardView>
+</LinearLayout>

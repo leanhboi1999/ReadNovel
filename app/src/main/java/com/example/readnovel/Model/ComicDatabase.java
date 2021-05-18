@@ -1,4 +1,4 @@
-package com.example.readnovel.model;
+package com.example.readnovel.Model;
 
 import io.realm.RealmObject;
 
