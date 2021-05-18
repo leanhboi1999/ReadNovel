@@ -14,4 +14,8 @@
     <string name="describeCoverStory">Show chapter</string>
     <string name="viewChapter">120000</string>
     <string name="nameComicDetail"></string>
+    <string name="introduceComic">Gi gỉ gì gi \n Truyện gì cũng có ^^</string>
+    <string name="descriptionDetail">Cuộc chiến giữa hai triều Tùy-Đường và Cao Câu Ly diễn ra liên miên, dân chúng ly tán, quan lại hủ bại, trộm cướp hoành hành khắp nơi.Trong thời đại ấy, xuất hiện một cao thủ tuyệt đỉnh, một ma nhân khát máu một thời từng vùng vẫy giang hồ, uy danh chấn động cả võ lâm; một vị đại tướng quân yêu nước có thể vì dân mà bất chấp tất cả và một chàng trai trẻ đầy nhiệt huyết</string>
+    <string name="describeImageView">Show chapter</string>
+    <string name="noPostFavorite">Chưa có truyện nào trong mục yêu thích</string>
 </resources>
