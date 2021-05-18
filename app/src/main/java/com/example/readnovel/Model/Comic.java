@@ -31,11 +31,11 @@ public class Comic {
         this.view = view;
     }
 
-    public String getThumbal() {
+    public String getThumb() {
         return thumbal;
     }
 
-    public void setThumbal(String thumbal) {
+    public void setThumb(String thumbal) {
         this.thumbal = thumbal;
     }
 
