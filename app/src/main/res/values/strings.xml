@@ -1,29 +1,3 @@
 <resources>
-        <string name="app_name">ReadNovel</string>
-        <string name="describeImageView">Show chapter</string>
-        <string name="describeCoverStory">Show chapter</string>
-        <string name="more">Xem thêm</string>
-        <string name="truyen_hot">Truyện hot</string>
-        <string name="truyen_moi">Mới cập nhật </string>
-        <string name="truyen_Cg">Con gái thích</string>
-        <string name="truyen_ct">Con trai thích</string>
-
-        <!-- TODO: Remove or change this placeholder text -->
-        <string name="noPost">Chưa có truyện nào</string>
-        <string name="noPostFavorite">Chưa có truyện nào trong mục yêu thích</string>
-        <string name="text_favorite">Truyện đã lưu</string>
-        <string name="update">Đang cập nhật</string>
-        <string name="findComic">Tìm kiếm truyện</string>
-        <string name="kindComic">Thể loại</string>
-        <string name="infoComic">Chi tiết truyện</string>
-        <string name="ratings">Bảng xếp hạng</string>
-        <string name="favorite">Yêu thích</string>
-        <string name="nameComic">Tên truyện</string>
-        <string name="updateLast">Cập nhật lần cuối</string>
-        <string name="categoryComic">Danh mục truyện</string>
-        <string name="introduceComic">Gi gỉ gì gi \n Truyện gì cũng có ^^</string>
-        <string name="chapterDemo">Chapter 1</string>
-        <string name="viewChapter">120000</string>
-        <string name="nameComicDetail">Thiên Lang Liệt Truyện</string>
-        <string name="descriptionDetail">Cuộc chiến giữa hai triều Tùy-Đường và Cao Câu Ly diễn ra liên miên, dân chúng ly tán, quan lại hủ bại, trộm cướp hoành hành khắp nơi.Trong thời đại ấy, xuất hiện một cao thủ tuyệt đỉnh, một ma nhân khát máu một thời từng vùng vẫy giang hồ, uy danh chấn động cả võ lâm; một vị đại tướng quân yêu nước có thể vì dân mà bất chấp tất cả và một chàng trai trẻ đầy nhiệt huyết</string>
+    <string name="app_name">ReadNovel</string>
 </resources>
