@@ -36,12 +36,12 @@ public class ComicDatabase extends RealmObject {
         this.url = url;
     }
 
-    public String getThumb() {
+    public String getThumbal() {
         return thumbal;
     }
 
-    public void setThumb(String thumb) {
-        this.thumbal = thumb;
+    public void setThumbal(String thumbal) {
+        this.thumbal = thumbal;
     }
 
     public String getChapter() {

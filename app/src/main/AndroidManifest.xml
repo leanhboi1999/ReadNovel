@@ -14,6 +14,7 @@
         android:theme="@style/Theme.AppCompat.Light"
         android:firebase_crashlytics_collection_enabled="false"
         android:theme="@style/Theme.ReadNovel">
+<<<<<<< refs/remotes/origin/master
         <activity android:name=".View.Dashboard"
             android:theme="@style/Theme.ReadNovel">
 
@@ -21,6 +22,10 @@
 
         <activity android:name=".View.MainActivity"
             android:theme="@style/Theme.ReadNovel">
+=======
+        <activity android:name=".View.Dashboard"></activity>
+        <activity android:name=".View.MainActivity">
+>>>>>>> Revert "Revert "Merge branch 'master' into NTV""
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER"/>

@@ -1,4 +1,4 @@
-package com.example.readnovel.Model;
+package com.example.readnovel.model;
 
 public class Banner {
     private String name;
