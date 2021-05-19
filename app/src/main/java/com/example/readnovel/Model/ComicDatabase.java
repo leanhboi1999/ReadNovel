@@ -42,7 +42,7 @@ public class ComicDatabase extends RealmObject {
 
     public void setThumbal(String thumbal) {
         this.thumbal = thumbal;
-    }
+
 
     public String getChapter() {
         return chapter;
