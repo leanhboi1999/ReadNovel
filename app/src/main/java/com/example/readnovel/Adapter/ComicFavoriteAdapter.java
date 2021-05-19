@@ -17,6 +17,7 @@ import com.example.readnovel.Model.Comic;
 import com.example.readnovel.Model.ComicDatabase;
 import com.example.readnovel.R;
 
+
 import java.util.List;
 
 import io.realm.Realm;
