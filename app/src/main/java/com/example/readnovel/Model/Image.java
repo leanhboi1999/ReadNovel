@@ -1,4 +1,4 @@
-package com.example.readnovel.Model;
+package com.example.readnovel.model;
 
 public class Image {
     private String url;
