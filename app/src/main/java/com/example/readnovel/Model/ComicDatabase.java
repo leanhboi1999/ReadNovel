@@ -40,9 +40,9 @@ public class ComicDatabase extends RealmObject {
         return thumbal;
     }
 
-    public void setThumbal(String thumbal) {
-        this.thumbal = thumbal;
-
+    public void setThumbal(String thumb) {
+        this.thumbal = thumb;
+    }
 
     public String getChapter() {
         return chapter;
