@@ -17,4 +17,15 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <!-- for material color -->
+    <color name="material1">#550025</color>
+    <color name="material2">#870d4d</color>
+    <color name="material3">#bb4679</color>
+    //custom
+    <color name="background">#1c162e</color>
+    <color name="edit_text">#322e41</color>
+    <color name="text_hint">#c7c7c7</color>
+
+    <color name="placeholder_bg">#dddddd</color>
+
 </resources>
