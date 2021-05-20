@@ -1,4 +1,4 @@
-package com.example.readnovel.Activity;
+/*package com.example.readnovel.Activity;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -6,16 +6,15 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.Toolbar;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.readnovel.Adapter.ComicFavoriteAdapter;
+//import com.example.readnovel.Adapter.ComicFavoriteAdapter;
+import com.example.readnovel.Model.Comic;
 import com.example.readnovel.Model.ComicDatabase;
 import com.example.readnovel.R;
-import com.example.readnovel.Model.Comic;
 
 import java.util.ArrayList;
 
@@ -46,7 +45,7 @@ public class FavoriteActivity extends AppCompatActivity {
         RealmResults<ComicDatabase> results1 =
                 myRealm.where(ComicDatabase.class).findAll();
         for (ComicDatabase c : results1) {
-            lstBXH.add(new Comic(c.getName(), c.getView(), c.getThumb(), c.getChapter(), c.getUrl()));
+            lstBXH.add(new Comic(c.getName(), c.getView(), c.getThumbal(), c.getChapter(), c.getUrl()));
         }
         if (lstBXH.size() == 0) {
             mNoPost.setVisibility(View.VISIBLE);
@@ -68,4 +67,4 @@ public class FavoriteActivity extends AppCompatActivity {
         mNoPost = findViewById(R.id.noPost);
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
     }
-}
+}*/

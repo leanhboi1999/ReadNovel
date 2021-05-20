@@ -1,4 +1,4 @@
-package com.example.readnovel.Adapter;
+/*package com.example.readnovel.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -148,4 +148,4 @@ public class ComicFavoriteAdapter extends RecyclerView.Adapter {
     }
 
 
-}
+}*/
