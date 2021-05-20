@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.readnovel.Activity.PageComicActivity;
 import com.example.readnovel.Model.Comic;
 import com.example.readnovel.Model.ComicDatabase;
 import com.example.readnovel.R;
@@ -21,7 +22,7 @@ import java.util.List;
 
 import io.realm.Realm;
 
-public class ComicFavoriteAdapter extends RecyclerView.Adapter {
+public class ComicFavoriteAdapter extends RecyclerView.Adapter<ComicFavoriteAdapter.ViewHolder> {
     private final List<Comic> lst;
     private final Context mContext;
     private String name;
@@ -41,7 +42,8 @@ public class ComicFavoriteAdapter extends RecyclerView.Adapter {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
+
         final Comic item = lst.get(holder.getAdapterPosition());
         holder.tvChapter.setText(item.getChapter());
         holder.tvName.setText(item.getName());
@@ -50,7 +52,7 @@ public class ComicFavoriteAdapter extends RecyclerView.Adapter {
             @Override
             public void onClick(View view) {
 
-                deleteFromDatabase(item.getName(),holder.getAdapterPosition());
+                deleteFromDatabase(item.getName(), holder.getAdapterPosition());
             }
         });
         Glide.with(mContext).load(item.getThumb()).into(holder.thumbnail);
@@ -63,6 +65,7 @@ public class ComicFavoriteAdapter extends RecyclerView.Adapter {
 
             }
         });
+
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -81,32 +84,6 @@ public class ComicFavoriteAdapter extends RecyclerView.Adapter {
             thumbnail = itemView.findViewById(R.id.imgThumb);
             btn_Delete = itemView.findViewById(R.id.btn_Delete);
         }
-
-    }
-
-    @Override
-    public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
-        final Comic item = lst.get(holder.getAdapterPosition());
-        holder.tvChapter.setText(item.getChapter());
-        holder.tvName.setText(item.getName());
-        holder.tvView.setText(item.getView());
-        holder.btn_Delete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                deleteFromDatabase(item.getName(),holder.getAdapterPosition());
-            }
-        });
-        Glide.with(mContext).load(item.getThumb()).into(holder.thumbnail);
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(mContext, PageComicActivity.class);
-                intent.putExtra("url", item.getLinkComic());
-                mContext.startActivity(intent);
-
-            }
-        });
 
     }
 

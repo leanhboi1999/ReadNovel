@@ -70,7 +70,7 @@ public class ComicAdapter extends RecyclerView.Adapter<ComicAdapter.ViewHolder> 
                     ComicDatabase cmDatabase = _myRealm.createObject(ComicDatabase.class);
                     cmDatabase.setName(item.getName());
                     cmDatabase.setChapter(item.getChapter());
-                    cmDatabase.setThumbal(item.getThumbal());
+                    cmDatabase.setThumb(item.getThumb());
                     cmDatabase.setView(item.getView());
                     cmDatabase.setUrl(item.getLinkComic());
                     _myRealm.commitTransaction();
@@ -79,7 +79,7 @@ public class ComicAdapter extends RecyclerView.Adapter<ComicAdapter.ViewHolder> 
                 }
             }
         });
-        Glide.with(_context).load(item.getThumbal()).into(holder.imgThumbal);
+        Glide.with(_context).load(item.getThumb()).into(holder.imgThumbal);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -109,7 +109,7 @@ public class ComicAdapter extends RecyclerView.Adapter<ComicAdapter.ViewHolder> 
             txtName = itemView.findViewById(R.id.txtName);
             txtView = itemView.findViewById(R.id.txtView);
             imgThumbal = itemView.findViewById(R.id.imgThumbal);
-            btnFavorite = itemView.findViewById(R.id.btnFavorite);
+            btnFavorite = itemView.findViewById(R.id.btnLike);
         }
     }
 

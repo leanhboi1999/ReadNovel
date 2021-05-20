@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -81,15 +82,16 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
         _hotTrend.showShimmer();
         _Girl.showShimmer();
         _Boy.showShimmer();
+        Realm.init(this);
+        //Set sự kiện cho search
+//        _searchAuto.addTextChangedListener(this);
+//        _searchAuto.setThreshold(0);
         //Khởi tạo hàm xử lý
-        //loadComicNewupdate();
+        loadComicNewupdate();
         loadComicHottrend();
         loadComicGirl();
         loadComicBoy();
-        Realm.init(this);
-        //Set sự kiện cho search
-        _searchAuto.addTextChangedListener(this);
-        _searchAuto.setThreshold(0);
+
     }
 
     //Khởi tạo UI
@@ -103,11 +105,11 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
         _urlBanner = new ArrayList<>();
         _search = new ArrayList<>();
         //Khởi tạo giao diện, bảo sao nó cứ null point mà không thấy báo lỗi
-        _sliderBanner.findViewById(R.id.banner_slider);
-        _newUpdate.findViewById(R.id.NewUpdate);
-        _hotTrend.findViewById(R.id.HotTrend);
-        _Boy.findViewById(R.id.Boy);
-        _Girl.findViewById(R.id.Girl);
+        _sliderBanner = findViewById(R.id.banner_slider);
+        _newUpdate = findViewById(R.id.NewUpdate);
+        _hotTrend = findViewById(R.id.HotTrend);
+        _Boy = findViewById(R.id.Boy);
+        _Girl = findViewById(R.id.Girl);
         Button btnTheloai = findViewById(R.id.btnTheLoai);
         btnTheloai.setOnClickListener(this);
         Button btnFavorite = findViewById(R.id.btnFavorite);
@@ -151,7 +153,25 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
                     public void onResponse(String response) {
                         Document document = Jsoup.parse(response);
                         Elements elementAll = document.select("div#ctl00_divCenter");
+                        Elements sub = elementAll.select(".item");
+                        for (Element element : sub) {
+                            Element hinhanh = element.getElementsByTag("img").get(0);
+                            Element linktruyen = element.getElementsByTag("a").get(0);
+                            Element sochuong = element.getElementsByTag("a").get(2);
+                            Element tentruyen = element.getElementsByTag("h3").get(0);
+                            Element luotxem = element.getElementsByTag("span").get(0);
+                            Element luotxem2 = null;
+                            try {
+                                luotxem2 = element.getElementsByTag("span").get(1);
+                            } catch (Exception ex) {
+                                ex.printStackTrace();
+                            }
+                            String thumbal;
+                            String thumbal1 = hinhanh.attr("src");
+                            String thumbal2 = hinhanh.attr("data-original");
 
+
+                        }
                     }
                 }, new Response.ErrorListener() {
                     @Override
@@ -215,11 +235,12 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
                             }
                             String chapter = sochuong.text();
                             _listUpdate.add(new Comic(name, viewCount, thumbal, chapter, link));
+                            Log.i("test", String.valueOf(sochuong));
                         }
 
                         for (int i = 0; i < 10; i++) {
                             String url = _listUpdate.get(i).getLinkComic();
-                            String thumbal = _listUpdate.get(i).getThumbal();
+                            String thumbal = _listUpdate.get(i).getThumb();
                             _banner.add(new RemoteBanner(thumbal));
                             _urlBanner.add(url);
                         }
