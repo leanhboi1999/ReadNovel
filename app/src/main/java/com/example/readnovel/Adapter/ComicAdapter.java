@@ -109,7 +109,7 @@ public class ComicAdapter extends RecyclerView.Adapter<ComicAdapter.ViewHolder> 
             txtName = itemView.findViewById(R.id.txtName);
             txtView = itemView.findViewById(R.id.txtView);
             imgThumbal = itemView.findViewById(R.id.imgThumbal);
-            btnFavorite = itemView.findViewById(R.id.btnFavorite);
+            btnFavorite = itemView.findViewById(R.id.btnLike);
         }
     }
 
