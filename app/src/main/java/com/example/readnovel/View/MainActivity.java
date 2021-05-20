@@ -36,9 +36,6 @@ public class MainActivity extends AppCompatActivity {
             makeRequest();
         }
         //Find id control
-        text_first = findViewById(R.id.text_first);
-        text_first.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.size_14sp));
-        text_first.setText("Đăng nhập");
 
         username = findViewById(R.id.username);
         password = findViewById(R.id.password);
