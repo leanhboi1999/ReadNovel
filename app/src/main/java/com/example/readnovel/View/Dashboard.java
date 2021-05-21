@@ -240,7 +240,7 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
 
                         for (int i = 0; i < 10; i++) {
                             String url = _listUpdate.get(i).getLinkComic();
-                            String thumbal = _listUpdate.get(i).getThumbal();
+                            String thumbal = _listUpdate.get(i).getThumb();
                             _banner.add(new RemoteBanner(thumbal));
                             _urlBanner.add(url);
                         }
