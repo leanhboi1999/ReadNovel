@@ -161,7 +161,7 @@ public class PageComicActivity extends AppCompatActivity implements View.OnClick
             ComicDatabase comic = myRealm.createObject(ComicDatabase.class);
             comic.setName(title);
             comic.setChapter(chapter);
-            comic.setThumb(thumb);
+            comic.setThumbal(thumb);
             comic.setView(view);
             comic.setUrl(url);
             myRealm.commitTransaction();
