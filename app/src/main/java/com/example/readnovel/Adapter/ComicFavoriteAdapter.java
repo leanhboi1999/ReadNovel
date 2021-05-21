@@ -1,4 +1,4 @@
-/*package com.example.readnovel.Adapter;
+package com.example.readnovel.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -44,7 +44,6 @@ public class ComicFavoriteAdapter extends RecyclerView.Adapter<ComicFavoriteAdap
 
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
-
         final Comic item = lst.get(holder.getAdapterPosition());
         holder.tvChapter.setText(item.getChapter());
         holder.tvName.setText(item.getName());
@@ -56,7 +55,7 @@ public class ComicFavoriteAdapter extends RecyclerView.Adapter<ComicFavoriteAdap
                 deleteFromDatabase(item.getName(), holder.getAdapterPosition());
             }
         });
-        Glide.with(mContext).load(item.getThumb()).into(holder.thumbnail);
+        Glide.with(mContext).load(item.getThumbal()).into(holder.thumbnail);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -87,6 +86,7 @@ public class ComicFavoriteAdapter extends RecyclerView.Adapter<ComicFavoriteAdap
         }
 
     }
+
 
     private void deleteFromDatabase(final String itemName, final int position) {
         Realm realm = Realm.getDefaultInstance();
@@ -125,4 +125,4 @@ public class ComicFavoriteAdapter extends RecyclerView.Adapter<ComicFavoriteAdap
     }
 
 
-}*/
+}

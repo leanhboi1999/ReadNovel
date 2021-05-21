@@ -1,17 +1,17 @@
-/*package com.example.readnovel.Activity;
+package com.example.readnovel.Activity;
 
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.Toolbar;
+import androidx.appcompat.widget.Toolbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-//import com.example.readnovel.Adapter.ComicFavoriteAdapter;
+import com.example.readnovel.Adapter.ComicFavoriteAdapter;
 import com.example.readnovel.Model.Comic;
 import com.example.readnovel.Model.ComicDatabase;
 import com.example.readnovel.R;
@@ -32,12 +32,8 @@ public class FavoriteActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favorite);
         initView();
-        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onBackPressed();
-            }
-        });
+
+        mToolbar.setNavigationOnClickListener(view -> onBackPressed());
 
         mToolbar.setTitle(getString(R.string.favorite));
         mToolbar.setTitleTextColor(Color.WHITE);
@@ -61,10 +57,15 @@ public class FavoriteActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
+
     private void initView() {
         lstBXH = new ArrayList<>();
         mFavoriteRv = findViewById(R.id.rv_favorite);
         mNoPost = findViewById(R.id.noPost);
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
     }
-}*/
+}

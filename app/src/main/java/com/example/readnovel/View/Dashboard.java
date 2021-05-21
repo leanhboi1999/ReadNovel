@@ -10,6 +10,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -22,6 +23,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.readnovel.Activity.FavoriteActivity;
 import com.example.readnovel.Adapter.ComicAdapter;
 import com.example.readnovel.Model.Comic;
 import com.example.readnovel.Model.Search;
@@ -46,7 +48,7 @@ import ss.com.bannerslider.views.BannerSlider;
 
 public class Dashboard extends AppCompatActivity implements View.OnClickListener, TextWatcher {
     //Khai báo view
-    Button btnBXH;
+    Button btnBXH, btnFavorite;
     TextView text;
     //Khai báo model lưu data
     private ArrayList<Comic> _listUpdate;
@@ -112,7 +114,7 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
         _Girl = findViewById(R.id.Girl);
         Button btnTheloai = findViewById(R.id.btnTheLoai);
         btnTheloai.setOnClickListener(this);
-        Button btnFavorite = findViewById(R.id.btnFavorite);
+        btnFavorite = findViewById(R.id.btnFavorite);
         btnFavorite.setOnClickListener(this);
         Button btnNewUpdate = findViewById(R.id.btnNewUpdate);
         btnNewUpdate.setOnClickListener(this);
@@ -133,7 +135,22 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
 
     @Override
     public void onClick(View v) {
+        switch (v.getId())
+        {
+            case R.id.btnBXH:
+                openRanking();
+                break;
+            case R.id.btnFavorite:
+                openFavorite();
+                break;
+            default:
+                break;
+        }
+    }
 
+    private void openFavorite() {
+        Intent iOpenFavorite = new Intent(Dashboard.this, FavoriteActivity.class);
+        startActivity(iOpenFavorite);
     }
 
     private void loadComicBoy() {
@@ -246,7 +263,7 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
                         }
 
                         _sliderBanner.setBanners(_banner);
-                        _sliderBanner.setInterval(1000);
+                        _sliderBanner.setInterval(5000);
                         _sliderBanner.setDefaultIndicator(2);
                         _sliderBanner.setMustAnimateIndicators(true);
                         _sliderBanner.setLoopSlides(true);
