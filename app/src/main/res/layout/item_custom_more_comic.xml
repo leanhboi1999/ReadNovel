@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="4dp"
+    android:background="@android:color/transparent"
+    app:cardCornerRadius="7dp"
+    app:cardElevation="7dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:layout_width="150dp"
+            android:layout_height="170dp">
+
+            <ImageView
+                android:contentDescription="@string/describeImageView"
+                android:id="@+id/imgThumb"
+                android:layout_width="150dp"
+                android:layout_height="175dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/cover_image" />
+
+            <TextView
+                android:id="@+id/tvChapter"
+                android:fontFamily="@font/roboto_medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/border_chapter"
+                android:padding="8sp"
+                android:text="@string/chapterDemo"
+                android:textColor="#fff"
+                android:textSize="12sp" />
+
+            <ImageButton
+                android:contentDescription="@string/describeImageView"
+                android:id="@+id/btn_Like"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/like_click"
+                android:padding="10dp"
+                android:src="@drawable/favorite" />
+
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+            <!--android:layout_alignParentBottom="true"-->
+            <TextView
+                android:id="@+id/tvName"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:fontFamily="@font/roboto_bold"
+                android:padding="8dp"
+                android:gravity="center"
+                android:text="@string/nameComicDetail"
+                android:textColor="#000"
+                android:textSize="16sp" />
+            <TextView
+                android:id="@+id/tv_View"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@color/edit_text"
+                android:drawableStart="@drawable/eye"
+                android:gravity="center|start"
+                android:drawablePadding="8dp"
+                android:padding="8dp"
+                android:fontFamily="@font/roboto_medium"
+                android:text="@string/viewChapter"
+                android:textColor="#FFF"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
