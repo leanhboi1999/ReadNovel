@@ -58,6 +58,9 @@ dependencies {
     // Recommended: Add the Firebase SDK for Google Analytics.
     implementation 'com.google.firebase:firebase-analytics:17.5.0'
     implementation "com.google.firebase:firebase-core:17.2.0"
+    //Update library shinner view recycle
+    implementation 'com.github.mike14u:shimmer-recyclerview-x:1.0.3'
+
 
     // Add the Firebase Crashlytics SDK.
     implementation 'com.google.firebase:firebase-crashlytics:17.2.2'

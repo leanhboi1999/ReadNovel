@@ -153,7 +153,17 @@
                             android:textSize="@dimen/text_hint" />
                     </LinearLayout>
 
-                    <com.todkars.shimmer.ShimmerRecyclerView
+<!--                    <com.todkars.shimmer.ShimmerRecyclerView-->
+<!--                        android:id="@+id/NewUpdate"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="match_parent"-->
+<!--                        android:layout_margin="4dp"-->
+<!--                        app:shimmer_demo_angle="20"-->
+<!--                        app:shimmer_demo_child_count="1"-->
+<!--                        app:shimmer_demo_layout="@layout/row_shimmer"-->
+<!--                        app:shimmer_demo_layout_manager_type="linear_vertical"-->
+<!--                        app:shimmer_demo_shimmer_color="@color/background" />-->
+                    <com.mikelau.views.shimmer.ShimmerRecyclerViewX
                         android:id="@+id/NewUpdate"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"

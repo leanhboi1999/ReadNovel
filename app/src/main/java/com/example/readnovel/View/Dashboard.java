@@ -30,6 +30,7 @@ import com.example.readnovel.Model.Search;
 import com.example.readnovel.R;
 import com.example.readnovel.Untils.CheckConnect;
 import com.example.readnovel.Untils.Link;
+import com.mikelau.views.shimmer.ShimmerRecyclerViewX;
 import com.todkars.shimmer.ShimmerRecyclerView;
 
 import org.jsoup.Jsoup;
@@ -59,7 +60,7 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
     private ArrayList<String> _urlBanner;
     private ArrayList<Search> _search;
     //Khai báo Id trên file xml
-    private ShimmerRecyclerView _newUpdate;
+    private ShimmerRecyclerViewX _newUpdate;
     private ShimmerRecyclerView _hotTrend;
     private ShimmerRecyclerView _Boy;
     private ShimmerRecyclerView _Girl;
@@ -80,7 +81,7 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
         _checkConnect = new CheckConnect(_root, Dashboard.this);
         _checkConnect.CheckConnection();
         //Khởi tạo Id view
-        _newUpdate.showShimmer();
+        _newUpdate.showShimmerAdapter();
         _hotTrend.showShimmer();
         _Girl.showShimmer();
         _Boy.showShimmer();
@@ -277,7 +278,7 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
                                 _newUpdate.setHasFixedSize(true);
                                 _newUpdate.setItemAnimator(new DefaultItemAnimator());
                                 _newUpdate.setAdapter(_newUpdateAdapter);
-                                _newUpdate.hideShimmer();
+                                _newUpdate.hideShimmerAdapter();
                             }
                         });
 
