@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:pickerui="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context=".Activity.CategoryActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        app:navigationIcon="@drawable/ic_arrow_back_black_24dp"
+        android:foregroundTint="@color/white"
+        android:background="@color/material2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </androidx.appcompat.widget.Toolbar>
+    <com.cooltechworks.views.shimmer.ShimmerRecyclerView
+        android:id="@+id/rvComic"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.dpizarro.uipicker.library.picker.PickerUI
+            android:id="@+id/picker_ui_view"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            pickerui:autoDismiss="true"
+            pickerui:backgroundColor="@color/white"
+            pickerui:blur="true"
+            pickerui:blur_FilterColor="#ff5e48"
+            pickerui:blur_downScaleFactor="@integer/blur_downscale_min"
+            pickerui:blur_radius="@integer/blur_radius_min"
+            pickerui:blur_use_renderscript="true"
+            pickerui:itemsClickables="true"
+            pickerui:linesCenterColor="@color/white"
+            pickerui:textCenterColor="#ffffff"
+            pickerui:textNoCenterColor="#ffffff" />
+
+    </LinearLayout>
+</LinearLayout>

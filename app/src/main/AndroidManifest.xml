@@ -33,6 +33,9 @@
         <activity android:name=".Activity.FavoriteActivity"
             android:theme="@style/Theme.ReadNovel">
         </activity>
+        <activity android:name=".Activity.DetailComicActivity" />
+        <activity android:name=".Activity.PageComicActivity" />
+        <activity android:name=".Activity.CategoryActivity" />
     </application>
 
 </manifest>
