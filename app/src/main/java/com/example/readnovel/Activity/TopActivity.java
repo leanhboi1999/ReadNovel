@@ -1,4 +1,4 @@
-package com.example.readnovel.View;
+package com.example.readnovel.Activity;
 
 import android.os.Bundle;
 import android.widget.AutoCompleteTextView;
