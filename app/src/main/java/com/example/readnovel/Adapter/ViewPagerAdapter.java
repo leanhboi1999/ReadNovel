@@ -5,6 +5,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.example.readnovel.Fragment.TopDayFragment;
+import com.example.readnovel.Fragment.TopMonthFragment;
+import com.example.readnovel.Fragment.TopWeekFragment;
 
 public class ViewPagerAdapter extends FragmentPagerAdapter {
 

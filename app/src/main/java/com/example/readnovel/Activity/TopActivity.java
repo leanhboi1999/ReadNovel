@@ -25,6 +25,7 @@ import com.example.readnovel.Adapter.SearchAdapter;
 import com.example.readnovel.Adapter.ViewPagerAdapter;
 import com.example.readnovel.Model.Search;
 import com.example.readnovel.R;
+import com.example.readnovel.Untils.Link;
 import com.google.android.material.tabs.TabLayout;
 
 import org.json.JSONException;
