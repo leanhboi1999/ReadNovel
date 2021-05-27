@@ -129,7 +129,7 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
 
     @Override
     public void onClick(View v) {
-
+        Intent more = new Intent(Dashboard.this, MoreActivity.class);
         switch (v.getId()) {
             case R.id.btnBXH:
                 openRanking();
@@ -141,16 +141,16 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
                 openTheLoai();
                 break;
             case R.id.btnHotTrend:
-                openHotTrend();
+                openHotTrend(more);
                 break;
             case R.id.btnNewUpdate:
-                openNewUpdate();
+                openNewUpdate(more);
                 break;
             case R.id.btnTruyenGirl:
-                openTruyenGirl();
+                openTruyenGirl(more);
                 break;
             case R.id.btnTruyenBoy:
-                openTruyenBoy();
+                openTruyenBoy(more);
                 break;
             default:
                 break;
@@ -158,15 +158,27 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
     }
 
     private void openTheLoai() {
+        Intent iOpenTheLoai = new Intent(Dashboard.this, CategoryActivity.class);
+        startActivity(iOpenTheLoai);
     }
 
-    private void openTruyenBoy() {
+    private void openTruyenBoy(Intent more) {
+        more.putExtra("url", Link.URL_HOMEPAGE);
+        more.putExtra("title", "Truyện con trai thích");
+        startActivity(more);
     }
 
-    private void openTruyenGirl() {
+    private void openTruyenGirl(Intent more) {
+        more.putExtra("url", Link.URL_GIRL);
+        more.putExtra("title", "Truyện con gái thích");
+        startActivity(more);
     }
 
-    private void openNewUpdate() {
+    private void openNewUpdate(Intent more) {
+        more.putExtra("url", Link.URL_HOMEPAGE);
+        more.putExtra("title", "Truyện mới cập nhật");
+        startActivity(more);
+
     }
 
 
@@ -505,7 +517,10 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
         startActivity(iOpenFavorite);
     }
 
-    private void openHotTrend() {
+    private void openHotTrend(Intent more) {
+        more.putExtra("url", Link.URL_HOT_TREND);
+        more.putExtra("title", "Truyện hot");
+        startActivity(more);
     }
 
     private void openRanking() {
