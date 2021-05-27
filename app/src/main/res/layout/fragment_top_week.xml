@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragment.TopWeekFragment">
+
+    <LinearLayout
+        android:id="@+id/noPost"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <ImageView
+            android:contentDescription="@string/describeImageView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/logo" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:gravity="center"
+            android:text="@string/noPost"
+            android:textColor="@color/material1"
+            android:textSize="@dimen/text_header"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <jp.co.recruit_lifestyle.android.widget.WaveSwipeRefreshLayout
+        android:id="@+id/swipeRefreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/rv_Ngay"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:shimmer_demo_angle="20"
+            app:shimmer_demo_child_count="1"
+            app:shimmer_demo_layout="@layout/row_shimmer"
+            app:shimmer_demo_layout_manager_type="linear_vertical"
+            app:shimmer_demo_shimmer_color="@color/background" />
+
+    </jp.co.recruit_lifestyle.android.widget.WaveSwipeRefreshLayout>
+</FrameLayout>
