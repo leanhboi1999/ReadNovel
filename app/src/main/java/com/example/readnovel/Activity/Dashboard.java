@@ -412,6 +412,11 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
 
                     }
                 });
+                stringRequest.setRetryPolicy(new DefaultRetryPolicy(
+                        150000,
+                        DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                        DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+                requestQueue.add(stringRequest);
             }
         }).start();
     }
@@ -426,8 +431,8 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
                     @Override
                     public void onResponse(String response) {
                         Document document = Jsoup.parse(response);
-                        Elements elementAll = document.select("div#ctl00_divCenter");
-                        Elements sub = elementAll.select("div#ctl00_divCenter");
+                        Elements all = document.select("div#ctl00_divCenter");
+                        Elements sub = all.select(".item");
                         for (Element element : sub) {
                             Element hinhanh = element.getElementsByTag("img").get(0);
                             Element linktruyen = element.getElementsByTag("a").get(0);
@@ -437,8 +442,8 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
                             Element luotxem2 = null;
                             try {
                                 luotxem2 = element.getElementsByTag("span").get(1);
-                            } catch (Exception e) {
-                                e.printStackTrace();
+                            } catch (Exception ex) {
+                                ex.printStackTrace();
                             }
                             String thumbal;
                             String thumbal1 = hinhanh.attr("src");
@@ -482,7 +487,6 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
                 }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-
                     }
                 });
                 stringRequest.setRetryPolicy(new DefaultRetryPolicy(
@@ -490,8 +494,10 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
                         DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                         DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
                 requestQueue.add(stringRequest);
+
             }
         }).start();
+
     }
 
     private void openFavorite() {
