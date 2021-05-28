@@ -15,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.readnovel.Activity.PageComicActivity;
 import com.example.readnovel.Model.Comic;
 import com.example.readnovel.Model.ComicDatabase;
 import com.example.readnovel.R;
@@ -84,7 +85,9 @@ public class ComicAdapter extends RecyclerView.Adapter<ComicAdapter.ViewHolder> 
             @Override
             public void onClick(View view) {
                 //Chuyển đến trang truyển
-                //Todo, từ từ rồi làm
+                Intent intent = new Intent(_context, PageComicActivity.class);
+                intent.putExtra("url", item.getLinkComic());
+                _context.startActivity(intent);
             }
         });
     }

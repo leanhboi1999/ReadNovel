@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -15,14 +16,18 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.Response.ErrorListener;
+import com.android.volley.ServerError;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.readnovel.Adapter.ComicAdapter;
+import com.example.readnovel.Adapter.SearchAdapter;
 import com.example.readnovel.Model.Comic;
 import com.example.readnovel.Model.Search;
 import com.example.readnovel.R;
@@ -35,6 +40,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -67,6 +73,7 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
     private CheckConnect _checkConnect;
     //Khai báo Adapter;
     private ComicAdapter _newUpdateAdapter;
+    private SearchAdapter _seachAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -529,7 +536,7 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
     @Override
     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
         //Todo something
-        
+
     }
 
     @Override
@@ -539,6 +546,83 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
 
     @Override
     public void afterTextChanged(Editable s) {
-        //Todo something
+        try {
+            requestSearch();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void requestSearch() {
+        _search.clear();
+        final String la = _searchAuto.getText().toString();
+        String keyword = la.replaceAll(" ", "+");
+        String urlSearch = Link.URL_SEARCH;
+        RequestQueue requestQueue = Volley.newRequestQueue(Dashboard.this);
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, urlSearch, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Document document = Jsoup.parse(response);
+                Elements all = document.select("div#ctl00_divCenter");
+                Elements sub = all.select(".item");
+                for (Element element : sub) {
+                    Element hinhanh = element.getElementsByTag("img").get(0);
+                    Element linktruyen = element.getElementsByTag("a").get(0);
+                    Element tentruyen = element.getElementsByTag("h3").get(0);
+                    String thumb;
+                    String thumb1 = hinhanh.attr("src");
+                    String thumb2 = hinhanh.attr("data-original");
+                    if (thumb2.equals("")) {
+                        thumb = thumb1;
+                    } else {
+                        thumb = thumb2;
+                    }
+                    String name = tentruyen.text();
+
+                    String link = linktruyen.attr("href");
+                    if (thumb.startsWith("http:") || thumb.startsWith("https:")) {
+                    } else {
+                        thumb = "http:" + thumb;
+                    }
+                    _search.add(new Search(name, thumb, link));
+                }
+                _seachAdapter = new SearchAdapter(Dashboard.this, R.layout.item_custom_search, _search);
+                _searchAuto.setAdapter(_seachAdapter);
+                _seachAdapter.notifyDataSetChanged();
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                NetworkResponse response = error.networkResponse;
+                if (error instanceof ServerError && response != null) {
+                    try {
+                        String res = new String(response.data,
+                                HttpHeaderParser.parseCharset(response.headers, "utf-8"));
+//                        JSONObject obj = new JSONObject(res);
+                    } catch (UnsupportedEncodingException e1) {
+                        e1.printStackTrace();
+                    }
+//                    catch (JSONException e2) {
+//                        e2.printStackTrace();
+//                    }
+                }
+            }
+        }
+        );
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.e("status:", "onresume");
+        _checkConnect.CheckConnection();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.e("status:", "onPause");
     }
 }
