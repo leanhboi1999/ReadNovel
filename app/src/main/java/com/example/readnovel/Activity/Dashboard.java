@@ -178,9 +178,23 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
         more.putExtra("url", Link.URL_HOMEPAGE);
         more.putExtra("title", "Truyện mới cập nhật");
         startActivity(more);
-
     }
 
+    private void openFavorite() {
+        Intent iOpenFavorite = new Intent(Dashboard.this, FavoriteActivity.class);
+        startActivity(iOpenFavorite);
+    }
+
+    private void openHotTrend(Intent more) {
+        more.putExtra("url", Link.URL_HOT_TREND);
+        more.putExtra("title", "Truyện hot");
+        startActivity(more);
+    }
+
+    private void openRanking() {
+        Intent iOpenRanking = new Intent(Dashboard.this, TopActivity.class);
+        startActivity(iOpenRanking);
+    }
 
     private void loadComicNewupdate() {
         _listUpdate.clear();
@@ -512,35 +526,19 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
 
     }
 
-    private void openFavorite() {
-        Intent iOpenFavorite = new Intent(Dashboard.this, FavoriteActivity.class);
-        startActivity(iOpenFavorite);
-    }
-
-    private void openHotTrend(Intent more) {
-        more.putExtra("url", Link.URL_HOT_TREND);
-        more.putExtra("title", "Truyện hot");
-        startActivity(more);
-    }
-
-    private void openRanking() {
-        Intent iOpenRanking = new Intent(Dashboard.this, TopActivity.class);
-        startActivity(iOpenRanking);
-    }
-
-
     @Override
     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
+        //Todo something
+        
     }
 
     @Override
     public void onTextChanged(CharSequence s, int start, int before, int count) {
-
+        //Todo something
     }
 
     @Override
     public void afterTextChanged(Editable s) {
-
+        //Todo something
     }
 }
