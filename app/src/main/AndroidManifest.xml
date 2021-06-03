@@ -15,12 +15,12 @@
         android:firebase_crashlytics_collection_enabled="false"
         android:theme="@style/Theme.ReadNovel">
         <activity android:name=".Activity.Dashboard"
-            android:theme="@style/Theme.ReadNovel">
+            android:theme="@style/Theme.RecoTheme">
 
         </activity>
 
         <activity android:name=".Activity.MainActivity"
-            android:theme="@style/Theme.ReadNovel">
+            android:theme="@style/Theme.AppCompat.Light">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER"/>

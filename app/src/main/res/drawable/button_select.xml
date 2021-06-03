@@ -3,6 +3,7 @@
     <corners android:radius="@dimen/border_card" />
     <stroke
         android:width="2dp"
-        android:color="@color/material2" />
-    <solid  android:color="@color/material1"/>
+        android:color="@color/yellow_500" />
+    <solid  android:color="@color/yellow_500"/>
+    <corners android:radius="5dp" />
 </shape>
