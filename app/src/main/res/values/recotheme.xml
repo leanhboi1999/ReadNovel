@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Base application theme. -->
+    <style name="Theme.RecoTheme" parent="Theme.AppCompat.Light">
+        <!-- Primary brand color. -->
+        <item name="colorPrimaryVariant">@color/yellow_700</item>
+
+        <!-- Customize your theme here. -->
+
+    </style>
+</resources>

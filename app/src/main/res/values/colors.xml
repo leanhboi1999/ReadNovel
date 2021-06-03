@@ -7,24 +7,33 @@
     <!-- for background dark UI -->
     <drawable name="screen_background_dark_transparent">#800000</drawable>
     <!-- for background default light UI -->
-    <drawable name="screen_background_light_transparent">#80ffffff</drawable>
+
     <!-- for color UI -->
-    <color name="transparent">#000000</color>
-    <color name="purple_200">#FFBB86FC</color>
-    <color name="purple_500">#FF6200EE</color>
-    <color name="purple_700">#FF3700B3</color>
+    <color name="loadmore_color">#d118ed</color>
+    <color name="yellow_200">#ffff99</color>
+    <color name="yellow_500">#ff9933</color>
+    <color name="yellow_700">#ff9933</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <!-- for material color -->
-    <color name="material1">#550025</color>
-    <color name="material2">#870d4d</color>
+    <!-- for  color -->
+    <color name="material1">#ffff99</color>
+    <color name="material2">#ff9933</color>
     <color name="material3">#bb4679</color>
     //custom
     <color name="background">#1c162e</color>
-    <color name="edit_text">#322e41</color>
+    <color name="edit_text">#ff6666</color>
     <color name="text_hint">#c7c7c7</color>
+    <!-- for gradient color -->
+    <color name="startColor">#ff9933</color>
+    <color name="endColor">#ffff99</color>
+    <color name="centerColor">#ff6666</color>
+    <color name="blendColor">#FFE882</color>
+    <color name="midColor">#FFC786</color>
+
+    <!-- for View color -->
+    <color name="btnDefault_Color">#ff9933</color>
 
     <color name="placeholder_bg">#dddddd</color>
 

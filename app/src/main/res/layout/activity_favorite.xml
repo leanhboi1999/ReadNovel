@@ -29,19 +29,21 @@
             android:visibility="gone">
 
             <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_height="150dp"
+                android:layout_gravity="center"
                 android:contentDescription="@string/describeImageView"
+                android:scaleType="centerCrop"
                 android:src="@drawable/logo" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
-                android:gravity="center"
                 android:fontFamily="@font/roboto_medium"
+                android:gravity="center"
                 android:text="@string/noPostFavorite"
-                android:textColor="@color/material1"
+                android:textColor="@color/centerColor"
                 android:textSize="@dimen/text_header"
                 android:textStyle="bold" />
         </LinearLayout>
