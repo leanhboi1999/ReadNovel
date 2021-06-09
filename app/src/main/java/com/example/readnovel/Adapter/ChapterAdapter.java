@@ -39,7 +39,7 @@ public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.ViewHold
 
         ViewHolder(View itemView) {
             super(itemView);
-            tvName = itemView.findViewById(R.id.tvName);
+            tvName = itemView.findViewById(R.id.btnName);
         }
     }
 

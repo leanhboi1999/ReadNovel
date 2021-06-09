@@ -37,10 +37,10 @@
             android:theme="@style/Theme.ReadNovel">
         </activity>
         <activity android:name=".Activity.DetailComicActivity"
-            android:theme="@style/Theme.ReadNovel">
+            android:theme="@style/Theme.RecoTheme">
         </activity>
         <activity android:name=".Activity.PageComicActivity"
-            android:theme="@style/Theme.ReadNovel">
+            android:theme="@style/Theme.RecoTheme">
         </activity>
         <activity android:name=".Activity.MoreActivity"
             android:theme="@style/Theme.ReadNovel">
