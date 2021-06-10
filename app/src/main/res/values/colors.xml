@@ -34,7 +34,7 @@
 
     <!-- for View color -->
     <color name="btnDefault_Color">#ff9933</color>
-
+    <color name="textColorHint">#4D95FF</color>
     <color name="placeholder_bg">#dddddd</color>
 
 </resources>

@@ -14,10 +14,12 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.example.readnovel.R;
+import com.google.android.material.textfield.TextInputEditText;
 
 public class MainActivity extends AppCompatActivity {
     TextView text_first;
-    EditText username, password;
+
+    TextInputEditText username,password;
     Button button_first, button_second;
     String username_text, password_text;
 
@@ -36,8 +38,8 @@ public class MainActivity extends AppCompatActivity {
         }
         //Find id control
 
-        username = findViewById(R.id.username);
-        password = findViewById(R.id.password);
+        username = findViewById(R.id.usernameCard);
+        password = findViewById(R.id.passwordCard);
 
         //Load image
         //image = findViewById(R.id.Image);
