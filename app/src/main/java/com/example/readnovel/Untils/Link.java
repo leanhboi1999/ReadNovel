@@ -12,4 +12,6 @@ public class Link {
     public static final String URL_KIND = "http://truyenchon.com/the-loai";
     public static final String URL_SEARCH = "http://truyenchon.com/the-loai?keyword=";
     public static final String URL_CHAPTER = "https://truyentranhaudio.online/";
+
+    public static final String URL_HOMEPAGE_TEST = "https://vietcomic.net/truyen-tranh-hay?type=hot";
 }

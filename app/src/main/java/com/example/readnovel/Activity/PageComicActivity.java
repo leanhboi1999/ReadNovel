@@ -113,7 +113,7 @@ public class PageComicActivity extends AppCompatActivity implements View.OnClick
                     mRvChapter.setItemAnimator(new DefaultItemAnimator());
                     adapter.notifyDataSetChanged();
                     mRvChapter.setAdapter(adapter);
-                }
+                }   
                 if (i == 1) {
                     adapter = new ChapterAdapter(getApplicationContext(), lstChapter);
                     RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getApplicationContext(), 3);

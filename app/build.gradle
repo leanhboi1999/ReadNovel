@@ -58,7 +58,8 @@ dependencies {
     // Recommended: Add the Firebase SDK for Google Analytics.
     implementation 'com.google.firebase:firebase-analytics:19.0.0'
     implementation "com.google.firebase:firebase-core:19.0.0"
-
+    implementation platform('com.google.firebase:firebase-bom:28.1.0')
+    implementation 'com.google.firebase:firebase-database'
     // Add the Firebase Crashlytics SDK.
     implementation 'com.google.firebase:firebase-crashlytics:18.0.0'
     apply plugin: 'realm-android'

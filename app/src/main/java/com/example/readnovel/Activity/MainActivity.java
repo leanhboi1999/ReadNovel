@@ -4,21 +4,30 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.example.readnovel.FbInstanceIdService;
 import com.example.readnovel.R;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.installations.FirebaseInstallations;
+
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
+    private static final FirebaseDatabase database = FbInstanceIdService.create();
     TextView text_first;
-
     TextInputEditText username,password;
     Button button_first, button_second;
     String username_text, password_text;
@@ -58,15 +67,22 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void login(View view) {
-        /*username_text = username.getText().toString();
-        password_text = password.getText().toString();*/
-
-        /*Intent i = new Intent(this, Dashboard.class);
-        startActivity(i);*/
+        /*username_text = Objects.requireNonNull(username.getText()).toString();
+        password_text = Objects.requireNonNull(password.getText()).toString();
+        if(username_text != null) {
+            Query pass = database.getReference().child("login").child(username_text);
+            if(pass.toString().equals(password_text)) {
+                Intent i = new Intent(this, Dashboard.class);
+                startActivity(i);
+            } else if (pass.toString().equals("")) {
+                Toast.makeText(getApplicationContext(), "User không tồn tại", Toast.LENGTH_LONG).show();
+            }
+        } else {
+            Toast.makeText(getApplicationContext(), "Chưa nhập user", Toast.LENGTH_LONG).show();
+        }*/
 
         Intent i = new Intent(this, Dashboard.class);
         startActivity(i);
-
     }
 
 }

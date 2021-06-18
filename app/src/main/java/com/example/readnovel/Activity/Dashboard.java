@@ -35,6 +35,8 @@ import com.example.readnovel.Untils.CheckConnect;
 import com.example.readnovel.Untils.Link;
 import com.todkars.shimmer.ShimmerRecyclerView;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -215,8 +217,8 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
                     public void onResponse(String response) {
                         //Thực thi
                         Document document = Jsoup.parse(response);
-                        Elements elementAll = document.select("div#ctl00_divCenter");
-                        Elements sub = elementAll.select(".item");
+                        Elements all = document.select("div#ctl00_divCenter");
+                        Elements sub = all.select(".item");
                         for (Element element : sub) {
                             Element hinhanh = element.getElementsByTag("img").get(0);
                             Element linktruyen = element.getElementsByTag("a").get(0);
@@ -298,6 +300,7 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
             }
         }).start(); //Khởi chạy thread nào
     }
+
 
     private void loadComicHottrend() {
         _listHottrend.clear();
@@ -557,7 +560,7 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
         _search.clear();
         final String la = _searchAuto.getText().toString();
         String keyword = la.replaceAll(" ", "+");
-        String urlSearch = Link.URL_SEARCH;
+        String urlSearch = Link.URL_SEARCH + keyword;
         RequestQueue requestQueue = Volley.newRequestQueue(Dashboard.this);
         StringRequest stringRequest = new StringRequest(Request.Method.GET, urlSearch, new Response.Listener<String>() {
             @Override
@@ -599,13 +602,12 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
                     try {
                         String res = new String(response.data,
                                 HttpHeaderParser.parseCharset(response.headers, "utf-8"));
-//                        JSONObject obj = new JSONObject(res);
+                        JSONObject obj = new JSONObject(res);
                     } catch (UnsupportedEncodingException e1) {
                         e1.printStackTrace();
                     }
-//                    catch (JSONException e2) {
-//                        e2.printStackTrace();
-//                    }
+                    catch (JSONException e2) {
+                       e2.printStackTrace(); }
                 }
             }
         }
