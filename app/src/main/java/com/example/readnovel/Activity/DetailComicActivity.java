@@ -51,6 +51,7 @@ public class DetailComicActivity extends AppCompatActivity implements View.OnSys
     }
 
     private void loadBook(final String url) {
+
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -59,7 +60,6 @@ public class DetailComicActivity extends AppCompatActivity implements View.OnSys
                     @Override
                     public void onResponse(String response) {
                         Document document = Jsoup.parse(response);
-
                         //load list chapter
                         lstImage.clear();
                         Elements chap = document.select("div.reading-detail.box_doc");

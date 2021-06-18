@@ -205,25 +205,25 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
         startActivity(iOpenRanking);
     }
 
-    /*private void loadComicNewupdate() {
+    private void loadComicNewupdate() {
         _listUpdate.clear();
         new Thread(new Runnable() {
             @Override
             public void run() {
                 //Tạo request crawl data
                 RequestQueue requestQueue = Volley.newRequestQueue(Dashboard.this);
-                StringRequest stringRequest = new StringRequest(Request.Method.GET, Link.URL_HOMEPAGE_TEST, new Response.Listener<String>() {
+                StringRequest stringRequest = new StringRequest(Request.Method.GET, Link.URL_HOMEPAGE, new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         //Thực thi
                         Document document = Jsoup.parse(response);
-                        Elements elementAll = document.select("div#ctl00_divCenter");
-                        Elements sub = elementAll.select(".item");
+                        Elements all = document.select("div#ctl00_divCenter");
+                        Elements sub = all.select(".item");
                         for (Element element : sub) {
                             Element hinhanh = element.getElementsByTag("img").get(0);
                             Element linktruyen = element.getElementsByTag("a").get(0);
                             Element sochuong = element.getElementsByTag("a").get(2);
-                            Element tentruyen = element.getElementsByTag("a").get(0);
+                            Element tentruyen = element.getElementsByTag("h3").get(0);
                             Element luotxem = element.getElementsByTag("span").get(0);
                             Element luotxem2 = null;
                             try {
@@ -299,97 +299,8 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
                 requestQueue.add(stringRequest);
             }
         }).start(); //Khởi chạy thread nào
-    }*/
-
-    private void loadComicNewupdate() {
-        _listUpdate.clear();
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                //Tạo request crawl data
-                RequestQueue requestQueue = Volley.newRequestQueue(Dashboard.this);
-                StringRequest stringRequest = new StringRequest(Request.Method.GET, Link.URL_HOMEPAGE_TEST, new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        //Thực thi
-                        Document document = Jsoup.parse(response);
-                        Elements elementAll = document.select("row-last-update");
-                        Elements sub = elementAll.select(".thumb-item-flow col-6 col-md-3");
-                        for (Element element : sub) {
-                            Element hinhanh = element.select("content img-in-ratio lazyloaded").first();
-                            Element linktruyen = element.select("thumb-wrapper > a").first();
-                            Element sochuong = element.select("more-chapter > a").first();
-                            Element tentruyen = element.getElementsByTag("a").get(1);
-                            Element luotxem = element.getElementsByTag("span").get(0);
-                            Element luotxem2 = null;
-                            try {
-                                luotxem2 = element.getElementsByTag("span").get(1);
-                            } catch (Exception ex) {
-                                ex.printStackTrace();
-                            }
-                            String thumbal = hinhanh.attr("data-bg");;
-                            String name = tentruyen.text();
-                            String link = linktruyen.attr("href");
-                            String view;
-                            if (luotxem.text().equals("")) {
-                                view = Objects.requireNonNull(luotxem2).text();
-                            } else {
-                                view = luotxem.text();
-                            }
-                            String string = view;
-                            String[] parts = string.split(" ");
-                            String viewCount = parts[0];
-                            if (thumbal.startsWith("http:") || thumbal.startsWith("https:")) {
-
-                            } else {
-                                thumbal = "https:" + thumbal;
-                            }
-                            String chapter = sochuong.attr("title");
-                            _listUpdate.add(new Comic(name, viewCount, thumbal, chapter, link));
-                            //Log.i("test", String.valueOf(sochuong));
-                        }
-
-                        for (int i = 0; i < 10; i++) {
-                            String url = _listUpdate.get(i).getLinkComic();
-                            String thumbal = _listUpdate.get(i).getThumbal();
-                            _banner.add(new RemoteBanner(thumbal));
-                            _urlBanner.add(url);
-                        }
-
-                        _sliderBanner.setBanners(_banner);
-                        _sliderBanner.setInterval(5000);
-                        _sliderBanner.setDefaultIndicator(2);
-                        _sliderBanner.setMustAnimateIndicators(true);
-                        _sliderBanner.setLoopSlides(true);
-
-                        _newUpdate.post(new Runnable() {
-                            @Override
-                            public void run() {
-                                _newUpdateAdapter = new ComicAdapter(Dashboard.this, _listUpdate);
-                                LinearLayoutManager horizontallayout = new LinearLayoutManager(Dashboard.this, LinearLayoutManager.HORIZONTAL, false);
-                                _newUpdate.setLayoutManager(horizontallayout);
-                                _newUpdate.setHasFixedSize(true);
-                                _newUpdate.setItemAnimator(new DefaultItemAnimator());
-                                _newUpdate.setAdapter(_newUpdateAdapter);
-                                _newUpdate.hideShimmer();
-                            }
-                        });
-
-                    }
-                }, new ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-
-                    }
-                });
-                //Set load time and try out
-                stringRequest.setRetryPolicy(new DefaultRetryPolicy(
-                        150000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
-                ));
-                requestQueue.add(stringRequest);
-            }
-        }).start(); //Khởi chạy thread nào
     }
+
 
     private void loadComicHottrend() {
         _listHottrend.clear();
