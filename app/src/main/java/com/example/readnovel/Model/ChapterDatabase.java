@@ -1,7 +1,9 @@
 package com.example.readnovel.Model;
 
-import io.realm.RealmObject;
 
-public class ChapterDatabase extends RealmObject {
+public class ChapterDatabase {
+    private String name;
+    private String chapter;
+
 
 }
