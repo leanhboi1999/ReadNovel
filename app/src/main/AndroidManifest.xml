@@ -45,6 +45,9 @@
         <activity android:name=".Activity.MoreActivity"
             android:theme="@style/Theme.ReadNovel">
         </activity>
+        <activity android:name=".Activity.RegisterActivity"
+            android:theme="@style/Theme.MaterialComponents.NoActionBar">
+        </activity>
     </application>
 
 </manifest>

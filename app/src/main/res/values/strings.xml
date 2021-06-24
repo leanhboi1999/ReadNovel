@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ReadNovel</string>
+    <string name="app_name">RECO</string>
     <string name="findcomic">Tìm kiếm truyện</string>
     <string name="kindcomic">Thể loại</string>
     <string name="ratings">Rating</string>
@@ -26,4 +26,6 @@
     <string name="updateLast">Cập nhật lần cuối</string>
     <string name="categoryComic">Danh mục truyện</string>
     <string name="noPost">Chưa có truyện nào</string>
+    <string name="login_email_hint">Email</string>
+    <string name="login_password_hint">Password</string>
 </resources>

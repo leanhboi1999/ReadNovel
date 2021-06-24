@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     TextInputEditText username,password;
     Button button_first, button_second;
     String username_text, password_text;
+    ImageView imgAddNewUser;
 
     //ImageView image;
     @Override
@@ -49,10 +51,22 @@ public class MainActivity extends AppCompatActivity {
 
         username = findViewById(R.id.usernameCard);
         password = findViewById(R.id.passwordCard);
-
+        imgAddNewUser = findViewById(R.id.imgAddNewUser);
+        imgAddNewUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                addNewUser(view);
+            }
+        });
         //Load image
         //image = findViewById(R.id.Image);
         button_first = findViewById(R.id.button_first);
+        button_first.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                signup(view);
+            }
+        });
         button_second = findViewById(R.id.button_second);
         button_second.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,6 +74,17 @@ public class MainActivity extends AppCompatActivity {
                 login(view);
             }
         });
+    }
+
+    private void addNewUser(View view) {
+        Intent i = new Intent(this, RegisterActivity.class);
+        startActivity(i);
+        overridePendingTransition(R.anim.slide_in_right,R.anim.stay);
+    }
+
+    private void signup(View view) {
+        Intent i = new Intent(this, RegisterActivity.class);
+        startActivity(i);
     }
 
     private void makeRequest() {

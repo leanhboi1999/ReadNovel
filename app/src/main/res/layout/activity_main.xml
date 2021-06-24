@@ -63,9 +63,10 @@
             android:paddingStart="5dp"
             android:paddingEnd="5dp"
             android:paddingBottom="5dp"
-            android:textColorHint="@color/textColorHint"
+            android:textColorHint="@color/grey5"
             android:theme="@style/CustomOutlineBox"
-            app:boxStrokeColor="@color/textColorHint">
+            app:hintTextColor="@color/centerColor"
+            app:boxStrokeColor="@color/centerColor">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/usernameCard"
@@ -101,15 +102,16 @@
             android:paddingStart="5dp"
             android:paddingEnd="5dp"
             android:paddingBottom="5dp"
-            android:textColorHint="@color/textColorHint"
+            android:textColorHint="@color/grey5"
             android:theme="@style/CustomOutlineBox"
-            app:boxStrokeColor="@color/textColorHint">
+            app:boxStrokeColor="@color/yellow_500"
+            app:hintTextColor="@color/yellow_500">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/passwordCard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawableStart="@drawable/idcard"
+                android:drawableStart="@drawable/key"
                 android:textColor="@color/black"
                 android:textSize="18sp" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -138,6 +140,29 @@
         app:layout_constraintBottom_toTopOf="@+id/button_first"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="13dp"
+        android:layout_height="0dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/ic_side_bg"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.95" />
+
+    <ImageView
+        android:id="@+id/imgAddNewUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+
+        android:layout_marginBottom="92dp"
+        android:src="@drawable/ic_add_img"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toStartOf="@+id/view" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -176,4 +201,16 @@
             android:layout_marginRight="@dimen/dimens_10dp"
             android:src="@drawable/tw" />
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="50dp"
+        android:text="Forgot Password?"
+        android:textColor="#503724"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/view"
+        app:layout_constraintTop_toBottomOf="@+id/password" />
 </androidx.constraintlayout.widget.ConstraintLayout>

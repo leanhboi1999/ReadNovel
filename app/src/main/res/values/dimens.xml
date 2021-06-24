@@ -73,7 +73,7 @@
 
     <!-- Dimens for custom view -->
     <dimen name="border_card">4dp</dimen>
-
+    <dimen name="loginViewsMargin">20dp</dimen>
     <!-- Dimens for Android Design -->
     <dimen name="activity_padding">16dp</dimen>
     <dimen name="placeholder_image">50dp</dimen>
