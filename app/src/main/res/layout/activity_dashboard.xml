@@ -50,7 +50,7 @@
             <ss.com.bannerslider.views.BannerSlider
                 android:id="@+id/banner_slider"
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
+                android:layout_height="450dp"
                 android:layout_marginLeft="@dimen/margin"
                 android:layout_marginRight="@dimen/margin"
                 android:layout_marginBottom="@dimen/margin"

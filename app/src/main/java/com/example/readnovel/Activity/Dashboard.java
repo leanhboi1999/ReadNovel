@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -263,6 +264,7 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
                             String url = _listUpdate.get(i).getLinkComic();
                             String thumbal = _listUpdate.get(i).getThumbal();
                             _banner.add(new RemoteBanner(thumbal));
+                            _banner.get(i).setScaleType(ImageView.ScaleType.FIT_XY);
                             _urlBanner.add(url);
                         }
 
