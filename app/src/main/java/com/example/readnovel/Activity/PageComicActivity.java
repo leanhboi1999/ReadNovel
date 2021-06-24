@@ -238,16 +238,18 @@ public class PageComicActivity extends AppCompatActivity implements View.OnClick
                         view = author.select("p").get(7);
 
                         String test = tac.text().trim();
-                        Log.e("TEst=", "'" + test + "'");
+                        Log.e("Test=", "'" + test + "'");
                         if (test.equals("Tác giả")) {
-                            Log.e("TEst:", "true");
+                            Log.e("Test:", "true");
                             tac = author.select("p").get(2);
                             trang = author.select("p").get(4);
                             the = author.select("p").get(6);
                             view = author.select("p").get(8);
                         } else {
-                            Log.e("TEst:", "false");
+                            Log.e("Test:", "false");
                         }
+
+
                         tacgia = tac.text();
                         mTvAuthor.setText(tacgia);
 
@@ -261,9 +263,10 @@ public class PageComicActivity extends AppCompatActivity implements View.OnClick
                         mViewTv.setText(theodoi);
 
                         /*Nội dung*/
-                        Elements noidung = document.select("div.detail-content");
-                        Element cont = noidung.select("p").first();
-                        content = cont.text();
+                        Elements detail = document.select("div.detail-content");
+                        Element del = detail.select("p").get(0);
+                        String test2 = del.text().trim();
+                        Log.e("Test:", test2);
                         mRvChapter.post(new Runnable() {
                             @Override
                             public void run() {
