@@ -19,7 +19,8 @@
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"
         android:background="@color/centerColor"
-        android:backgroundTint="@color/centerColor">
+        android:backgroundTint="@color/centerColor"
+        >
 
         <ImageView
             android:id="@+id/imgPreChap"
@@ -36,8 +37,9 @@
             android:id="@+id/imgNextChap"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
+            android:layout_gravity="center_vertical|end"
+            android:layout_alignParentEnd="true"
             android:layout_marginEnd="@dimen/dimens_16dp"
             app:srcCompat="@drawable/next" />
 
@@ -46,6 +48,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
+            android:layout_gravity="center"
             android:text="Chap 1"
             android:textColor="@color/white"
             android:textSize="@dimen/size_20sp"

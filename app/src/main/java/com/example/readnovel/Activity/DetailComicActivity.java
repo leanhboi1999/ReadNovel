@@ -1,5 +1,6 @@
 package com.example.readnovel.Activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,6 +12,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -27,6 +29,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.readnovel.Adapter.ComicViewAdapter;
 import com.example.readnovel.Model.Image;
 import com.example.readnovel.R;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -59,8 +62,43 @@ public class DetailComicActivity extends AppCompatActivity implements View.OnSys
         });
         loadBook(URL_IMAGE);
         onSystemUiVisibilityChange(2);
-
+        onHandleChapterBehavior();
     }
+
+    private void onHandleChapterBehavior() {
+        mRvComic.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+            }
+
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                if (dy > 0 && rlChapter.isShown()) {
+                    rlChapter.setVisibility(View.GONE);
+                }
+                else if (dy < 0 ) {
+                    rlChapter.setVisibility(View.VISIBLE);
+
+                }
+
+            }
+        });
+        rlChapterLayout.setOnContextClickListener(new View.OnContextClickListener() {
+            @Override
+            public boolean onContextClick(View view) {
+                Toast.makeText(DetailComicActivity.this,"Hi",Toast.LENGTH_LONG).show();
+                if (rlChapter.isShown())
+                {
+                    rlChapter.setVisibility(View.GONE);
+                }
+                else
+                {
+                    rlChapter.setVisibility(View.VISIBLE);
+                }
+                return false;
+            }
+        }); }
 
     private void loadBook(final String url) {
 
@@ -123,10 +161,9 @@ public class DetailComicActivity extends AppCompatActivity implements View.OnSys
         imgNextChap = findViewById(R.id.imgNextChap);
         imgPreChap = findViewById(R.id.imgPreChap);
         txtChapName = findViewById(R.id.txtChapName);
-        gestureDetector = new GestureDetector(this,new MyGestureListener());
         rlChapter = findViewById(R.id.rlChapter);
+        rlChapterLayout = findViewById(R.id.rlChapterLayout);
 
-        mRvComic.setOnTouchListener(touchListener);
     }
 
     @Override
@@ -151,58 +188,5 @@ public class DetailComicActivity extends AppCompatActivity implements View.OnSys
     @Override
     public void onSystemUiVisibilityChange(int visibility) {
 
-    }
-
-    View.OnTouchListener touchListener = new View.OnTouchListener() {
-        @Override
-        public boolean onTouch(View v, MotionEvent event) {
-            // pass the events to the gesture detector
-            // a return value of true means the detector is handling it
-            // a return value of false means the detector didn't
-            // recognize the event
-            return gestureDetector.onTouchEvent(event);
-
-        }
-    };
-
-    class MyGestureListener extends GestureDetector.SimpleOnGestureListener {
-
-        @Override
-        public boolean onDown(MotionEvent event) {
-            // don't return false here or else none of the other
-            // gestures will work
-            return true;
-        }
-
-        @Override
-        public boolean onSingleTapConfirmed(MotionEvent e) {
-            rlChapter.setVisibility(View.VISIBLE);
-            return true;
-        }
-
-        @Override
-        public void onLongPress(MotionEvent e) {
-
-        }
-
-        @Override
-        public boolean onDoubleTap(MotionEvent e) {
-
-            return true;
-        }
-
-        @Override
-        public boolean onScroll(MotionEvent e1, MotionEvent e2,
-                                float distanceX, float distanceY) {
-            rlChapter.setVisibility(View.INVISIBLE);
-            return true;
-        }
-
-        @Override
-        public boolean onFling(MotionEvent event1, MotionEvent event2,
-                               float velocityX, float velocityY) {
-
-            return true;
-        }
     }
 }
