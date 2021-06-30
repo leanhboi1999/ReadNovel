@@ -2,7 +2,14 @@ package com.example.readnovel.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -32,6 +39,10 @@ public class DetailComicActivity extends AppCompatActivity implements View.OnSys
     private ArrayList<Image> lstImage;
     private ComicViewAdapter adapter;
     private RecyclerView mRvComic;
+    private ImageView imgPreChap, imgNextChap;
+    private TextView txtChapName;
+    private GestureDetector gestureDetector;
+    private RelativeLayout rlChapter,rlChapterLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +59,7 @@ public class DetailComicActivity extends AppCompatActivity implements View.OnSys
         });
         loadBook(URL_IMAGE);
         onSystemUiVisibilityChange(2);
+
     }
 
     private void loadBook(final String url) {
@@ -108,6 +120,13 @@ public class DetailComicActivity extends AppCompatActivity implements View.OnSys
     private void initView() {
         lstImage = new ArrayList<>();
         mRvComic = findViewById(R.id.rvComic);
+        imgNextChap = findViewById(R.id.imgNextChap);
+        imgPreChap = findViewById(R.id.imgPreChap);
+        txtChapName = findViewById(R.id.txtChapName);
+        gestureDetector = new GestureDetector(this,new MyGestureListener());
+        rlChapter = findViewById(R.id.rlChapter);
+
+        mRvComic.setOnTouchListener(touchListener);
     }
 
     @Override
@@ -132,5 +151,58 @@ public class DetailComicActivity extends AppCompatActivity implements View.OnSys
     @Override
     public void onSystemUiVisibilityChange(int visibility) {
 
+    }
+
+    View.OnTouchListener touchListener = new View.OnTouchListener() {
+        @Override
+        public boolean onTouch(View v, MotionEvent event) {
+            // pass the events to the gesture detector
+            // a return value of true means the detector is handling it
+            // a return value of false means the detector didn't
+            // recognize the event
+            return gestureDetector.onTouchEvent(event);
+
+        }
+    };
+
+    class MyGestureListener extends GestureDetector.SimpleOnGestureListener {
+
+        @Override
+        public boolean onDown(MotionEvent event) {
+            // don't return false here or else none of the other
+            // gestures will work
+            return true;
+        }
+
+        @Override
+        public boolean onSingleTapConfirmed(MotionEvent e) {
+            rlChapter.setVisibility(View.VISIBLE);
+            return true;
+        }
+
+        @Override
+        public void onLongPress(MotionEvent e) {
+
+        }
+
+        @Override
+        public boolean onDoubleTap(MotionEvent e) {
+
+            return true;
+        }
+
+        @Override
+        public boolean onScroll(MotionEvent e1, MotionEvent e2,
+                                float distanceX, float distanceY) {
+            rlChapter.setVisibility(View.INVISIBLE);
+            return true;
+        }
+
+        @Override
+        public boolean onFling(MotionEvent event1, MotionEvent event2,
+                               float velocityX, float velocityY) {
+
+            return true;
+        }
     }
 }
