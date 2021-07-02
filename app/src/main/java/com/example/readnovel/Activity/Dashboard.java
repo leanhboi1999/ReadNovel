@@ -133,7 +133,7 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
         //init Slider
         initSlider();
         sliderItems = new ArrayList<>();
-        sliderAdapter = new SliderAdapter(sliderItems, viewPager2);
+        sliderAdapter = new SliderAdapter(sliderItems, viewPager2, _listUpdate);
         viewPager2.setAdapter(sliderAdapter);
 
 
@@ -163,6 +163,7 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
         viewPager2.setClipChildren(false);
         viewPager2.setOffscreenPageLimit(3);
         viewPager2.getChildAt(0).setOverScrollMode(RecyclerView.OVER_SCROLL_NEVER);
+        viewPager2.setCurrentItem(2);
         CompositePageTransformer compositePageTransformer = new CompositePageTransformer();
         compositePageTransformer.addTransformer(new MarginPageTransformer(40));
         compositePageTransformer.addTransformer(new ViewPager2.PageTransformer() {
@@ -181,6 +182,7 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
                 sliderHandler.postDelayed(sliderRunnable, 3000);
             }
         });
+
     }
 
 
@@ -315,6 +317,7 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
 //                            _urlBanner.add(url);
 
                             sliderItems.add(new SliderItem(thumbal));
+                            sliderAdapter.setUrl(url);
                             sliderAdapter.setItems(sliderItems);
                             sliderAdapter.notifyDataSetChanged();
                         }
