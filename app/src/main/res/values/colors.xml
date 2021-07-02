@@ -9,7 +9,7 @@
     <!-- for background default light UI -->
 
     <!-- for color UI -->
-    <color name="loadmore_color">#d118ed</color>
+    <color name="loadmore_color">@color/white</color>
     <color name="yellow_200">#ffff99</color>
     <color name="yellow_500">#ff9933</color>
     <color name="yellow_700">#ff9933</color>
@@ -25,6 +25,8 @@
     <color name="background">#1c162e</color>
     <color name="edit_text">#ff6666</color>
     <color name="text_hint">#c7c7c7</color>
+    <color name="lightPink">#ff8787</color>
+    <color name="darkPink">#fc4242</color>
     <!-- for gradient color -->
     <color name="startColor">#ff9933</color>
     <color name="endColor">#ffff99</color>

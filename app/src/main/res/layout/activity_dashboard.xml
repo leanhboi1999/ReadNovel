@@ -70,46 +70,41 @@
                 android:gravity="center"
                 android:orientation="horizontal">
 
-                <Button
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btnTheLoai"
-                    style="?android:attr/buttonBarButtonStyle"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/min_height_button"
                     android:layout_marginStart="@dimen/margin"
                     android:layout_weight="1"
-                    android:background="@drawable/button_normal"
-                    app:backgroundTint="@color/centerColor"
+                    android:background="@drawable/button_click"
                     android:fontFamily="@font/roboto_bold"
                     android:text="@string/kindcomic"
                     android:textAllCaps="false"
                     android:textColor="#8E0A0A"
-                    android:textSize="@dimen/text_normal" />
+                    android:textSize="@dimen/text_normal"
+                    />
 
-                <Button
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btnBXH"
-                    style="?android:attr/buttonBarButtonStyle"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/max_height_button"
                     android:layout_marginStart="@dimen/margin"
                     android:layout_weight="1"
-                    android:background="@drawable/button_normal"
-                    app:backgroundTint="@color/centerColor"
+                    android:background="@drawable/button_click"
                     android:fontFamily="@font/roboto_bold"
                     android:text="@string/ratings"
                     android:textAllCaps="false"
                     android:textColor="#8E0A0A"
                     android:textSize="@dimen/text_header" />
 
-                <Button
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btnFavorite"
-                    style="?android:attr/buttonBarButtonStyle"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/min_height_button"
                     android:layout_marginLeft="@dimen/margin"
                     android:layout_marginRight="@dimen/margin"
                     android:layout_weight="1"
                     android:background="@drawable/button_normal"
-                    app:backgroundTint="#FF6666"
                     android:fontFamily="@font/roboto_bold"
                     android:text="@string/favorite"
                     android:textAllCaps="false"
@@ -139,15 +134,20 @@
                         android:paddingStart="@dimen/margin"
                         android:paddingEnd="@dimen/margin">
 
-                        <Button
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:layout_marginTop="5dp"
+                            android:layout_marginRight="5dp"
+                            android:layout_marginBottom="3dp"
                             android:id="@+id/btnNewUpdate"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:background="@android:color/transparent"
+                            android:layout_height="@dimen/dimens_40dp"
+                            android:background="@drawable/button_loadmore"
                             android:fontFamily="@font/roboto_medium"
                             android:text="@string/more"
                             android:textColor="@color/loadmore_color"
-                            android:textSize="@dimen/text_hint" />
+                            android:textStyle="bold"
+                            android:textSize="@dimen/size_28sp"
+                            android:textAlignment="center"/>
 
                         <TextView
                             android:layout_width="0dp"
@@ -195,15 +195,20 @@
                         android:paddingStart="@dimen/margin"
                         android:paddingEnd="@dimen/margin">
 
-                        <Button
+                        <androidx.appcompat.widget.AppCompatButton
                             android:id="@+id/btnHotTrend"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginRight="5dp"
+                            android:layout_marginBottom="3dp"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:background="@android:color/transparent"
+                            android:layout_height="@dimen/dimens_40dp"
+                            android:background="@drawable/button_loadmore"
                             android:fontFamily="@font/roboto_medium"
                             android:text="@string/more"
                             android:textColor="@color/loadmore_color"
-                            android:textSize="@dimen/text_hint" />
+                            android:textStyle="bold"
+                            android:textSize="@dimen/size_28sp"
+                            android:textAlignment="center" />
 
                         <TextView
                             android:layout_width="0dp"
@@ -252,15 +257,20 @@
                         android:paddingStart="@dimen/margin"
                         android:paddingEnd="@dimen/margin">
 
-                        <Button
+                        <androidx.appcompat.widget.AppCompatButton
                             android:id="@+id/btnTruyenGirl"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginRight="5dp"
+                            android:layout_marginBottom="3dp"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:background="@android:color/transparent"
+                            android:layout_height="@dimen/dimens_40dp"
+                            android:background="@drawable/button_loadmore"
                             android:fontFamily="@font/roboto_medium"
                             android:text="@string/more"
                             android:textColor="@color/loadmore_color"
-                            android:textSize="@dimen/text_hint" />
+                            android:textStyle="bold"
+                            android:textSize="@dimen/size_28sp"
+                            android:textAlignment="center" />
 
                         <TextView
                             android:layout_width="0dp"
@@ -309,15 +319,20 @@
                         android:paddingStart="@dimen/margin"
                         android:paddingEnd="@dimen/margin">
 
-                        <Button
+                        <androidx.appcompat.widget.AppCompatButton
                             android:id="@+id/btnTruyenBoy"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginRight="5dp"
+                            android:layout_marginBottom="3dp"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:background="@android:color/transparent"
+                            android:layout_height="@dimen/dimens_40dp"
+                            android:background="@drawable/button_loadmore"
                             android:fontFamily="@font/roboto_medium"
                             android:text="@string/more"
                             android:textColor="@color/loadmore_color"
-                            android:textSize="@dimen/text_hint" />
+                            android:textStyle="bold"
+                            android:textSize="@dimen/size_28sp"
+                            android:textAlignment="center" />
 
                         <TextView
                             android:layout_width="0dp"

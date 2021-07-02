@@ -54,7 +54,7 @@
 
                     <ImageButton
                         android:id="@+id/btn_Like"
-                        android:layout_width="40dp"
+                        android:layout_width="38dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="bottom|end"
                         android:layout_marginBottom="@dimen/margin"
