@@ -12,22 +12,30 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.example.readnovel.FbInstanceIdService;
+import com.example.readnovel.Model.User;
 import com.example.readnovel.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.installations.FirebaseInstallations;
 
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
-    private static final FirebaseDatabase database = FbInstanceIdService.create();
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
     TextView text_first;
     TextInputEditText username,password;
     Button button_first, button_second;
@@ -48,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
             makeRequest();
         }
         //Find id control
+
 
         username = findViewById(R.id.usernameCard);
         password = findViewById(R.id.passwordCard);
@@ -92,22 +101,31 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void login(View view) {
-        /*username_text = Objects.requireNonNull(username.getText()).toString();
-        password_text = Objects.requireNonNull(password.getText()).toString();
+        username_text = Objects.requireNonNull(username.getText()).toString().trim();
+        password_text = Objects.requireNonNull(password.getText()).toString().trim();
         if(username_text != null) {
-            Query pass = database.getReference().child("login").child(username_text);
-            if(pass.toString().equals(password_text)) {
-                Intent i = new Intent(this, Dashboard.class);
-                startActivity(i);
-            } else if (pass.toString().equals("")) {
-                Toast.makeText(getApplicationContext(), "User không tồn tại", Toast.LENGTH_LONG).show();
-            }
-        } else {
-            Toast.makeText(getApplicationContext(), "Chưa nhập user", Toast.LENGTH_LONG).show();
-        }*/
-
-        Intent i = new Intent(this, Dashboard.class);
-        startActivity(i);
+            DocumentReference dr = db.collection("user").document(username_text);
+            dr.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if(task.isSuccessful()) {
+                        DocumentSnapshot doc = task.getResult();
+                        assert doc != null;
+                        User login = new User(doc.get("email").toString(), doc.get("username").toString(), doc.get("password").toString());
+                        if(login.getPassword().equals(password_text)) {
+                            Intent i = new Intent(MainActivity.this, Dashboard.class);
+                            startActivity(i);
+                        } else {
+                            Toast.makeText(MainActivity.this, "Bạn nhập sai mật khẩu", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(MainActivity.this, "Người dùng không tồn tại", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
     }
-
 }
