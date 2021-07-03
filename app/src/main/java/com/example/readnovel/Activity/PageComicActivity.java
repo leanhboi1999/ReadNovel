@@ -1,5 +1,6 @@
 package com.example.readnovel.Activity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -34,6 +35,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.example.readnovel.Adapter.ChapterAdapter;
+import com.example.readnovel.Model.BookmarkDatabase;
 import com.example.readnovel.Model.Chapter;
 import com.example.readnovel.Model.ComicDatabase;
 import com.example.readnovel.R;
@@ -76,6 +78,7 @@ public class PageComicActivity extends AppCompatActivity implements View.OnClick
     private Spinner mSpinnerSort;
     private Realm myRealm;
     private Toolbar mToolbar;
+    private Realm _myRealm = Realm.getDefaultInstance();
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -135,9 +138,9 @@ public class PageComicActivity extends AppCompatActivity implements View.OnClick
             }
         });
         loadBook(URL_COMIC);
-
-
     }
+
+
 
     @Override
     public void onBackPressed() {
@@ -210,6 +213,7 @@ public class PageComicActivity extends AppCompatActivity implements View.OnClick
                         Element tit = tieude.select("h1").first();
                         title = tit.text();
                         mTvName.setText(title);
+                        loadTextButton(title);
                         //time update
                         Element update = tieude.select("time").first();
                         updatetime = update.text();
@@ -309,15 +313,41 @@ public class PageComicActivity extends AppCompatActivity implements View.OnClick
         }).start();
     }
 
+    @SuppressLint("SetTextI18n")
+    private void loadTextButton(String title) {
+        boolean check = false;
+        RealmResults<BookmarkDatabase> result = _myRealm.where(BookmarkDatabase.class).findAll();
+        for(BookmarkDatabase database : result) {
+            if(database.getName().equals(title)) {
+                if(database.getChapter() != null) {
+                    check = true;
+                    btnBookmark.setText("Xem tiếp chap " + database.getChapter());
+                }
+            }
+        }
+
+        if(!check) {
+            btnBookmark.setText("Bắt đầu xem");
+        }
+
+    }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_Like:
                 addToDB(title, lstChapNormal.get(0).getName(), thumb, theodoi, URL_COMIC);
                 break;
+            case R.id.btnBookmark:
+                loadBookmark();
+                break;
             default:
                 break;
         }
+    }
+
+    private void loadBookmark() {
+
     }
 
     static class SavedState extends View.BaseSavedState {
@@ -366,6 +396,9 @@ public class PageComicActivity extends AppCompatActivity implements View.OnClick
         mSpinnerSort = findViewById(R.id.spinnerSort);
         ImageButton mLikeBtn = findViewById(R.id.btn_Like);
         mLikeBtn.setOnClickListener(this);
+        btnBookmark = findViewById(R.id.btnBookmark);
+        btnBookmark.setOnClickListener(this);
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
+
     }
 }

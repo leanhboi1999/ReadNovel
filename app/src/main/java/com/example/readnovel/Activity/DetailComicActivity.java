@@ -38,7 +38,7 @@ import org.jsoup.select.Elements;
 
 import java.util.ArrayList;
 
-public class DetailComicActivity extends AppCompatActivity implements View.OnSystemUiVisibilityChangeListener {
+public class DetailComicActivity extends AppCompatActivity implements View.OnSystemUiVisibilityChangeListener, View.OnClickListener {
     private ArrayList<Image> lstImage;
     private ComicViewAdapter adapter;
     private RecyclerView mRvComic;
@@ -123,6 +123,13 @@ public class DetailComicActivity extends AppCompatActivity implements View.OnSys
                             String url = element.attr("src");
                             lstImage.add(new Image(url));
                         }
+                        Elements navigation = document.select("div.chapter-nav");
+                        Element next = navigation.select("a").get(4);
+                        String urlNext = next.attr("href");
+                        Element prev = navigation.select("a").get(3);
+                        String urlPrev = prev.attr("href");
+                        Log.d("test", urlNext);
+                        Log.d("test", urlPrev);
                         mRvComic.post(new Runnable() {
                             @Override
                             public void run() {
@@ -159,12 +166,28 @@ public class DetailComicActivity extends AppCompatActivity implements View.OnSys
                         | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
     }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.imgNextChap:
+
+                break;
+            case R.id.imgPreChap:
+
+                break;
+            default:
+                break;
+        }
+    }
+
 
     private void initView() {
         lstImage = new ArrayList<>();
         mRvComic = findViewById(R.id.rvComic);
         imgNextChap = findViewById(R.id.imgNextChap);
+        imgNextChap.setOnClickListener(this);
         imgPreChap = findViewById(R.id.imgPreChap);
+        imgPreChap.setOnClickListener(this);
         txtChapName = findViewById(R.id.txtChapName);
         rlChapter = findViewById(R.id.rlChapter);
         rlChapterLayout = findViewById(R.id.rlChapterLayout);

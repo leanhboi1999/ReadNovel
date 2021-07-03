@@ -97,8 +97,8 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
     private ComicAdapter _newUpdateAdapter;
     private SearchAdapter _seachAdapter;
     //Khai báo truy vấn database
-    private final Realm _myRealm = Realm.getDefaultInstance();
-    private ArrayList<Bookmark> bookmarks;
+
+    private ArrayList<Bookmark> bookmarks = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -127,6 +127,7 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
     }
 
     private void loadBookmark() {
+        Realm _myRealm = Realm.getDefaultInstance();
         bookmarks.clear();
         RealmResults<BookmarkDatabase> result = _myRealm.where(BookmarkDatabase.class).findAll();
         for(BookmarkDatabase database :result) {

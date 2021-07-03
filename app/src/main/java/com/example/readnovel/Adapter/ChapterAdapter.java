@@ -52,7 +52,7 @@ public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
         final Chapter item = lst.get(position);
-        holder.tvName.setText(item.getName());
+        holder.tvName.setText(item.getChapter());
 
         holder.tvName.setOnClickListener(new View.OnClickListener() {
             @Override
