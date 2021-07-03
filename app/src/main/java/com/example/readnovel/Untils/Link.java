@@ -11,7 +11,7 @@ public class Link {
     public static final String URL_GIRL = "http://truyenchon.com/truyen-con-gai";
     public static final String URL_KIND = "http://truyenchon.com/the-loai";
     public static final String URL_SEARCH = "http://truyenchon.com/the-loai?keyword=";
-    public static final String URL_CHAPTER = "https://truyentranhaudio.online/";
 
-    public static final String URL_HOMEPAGE_TEST = "https://vietcomic.net/truyen-tranh-hay?type=hot";
+    //API
+    public static final String GET_COMIC = "http://10.0.2.2:8000/api/favorite/";
 }

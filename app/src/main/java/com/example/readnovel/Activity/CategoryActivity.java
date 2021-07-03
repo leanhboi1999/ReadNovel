@@ -23,7 +23,7 @@ import com.dpizarro.uipicker.library.picker.PickerUI;
 import com.dpizarro.uipicker.library.picker.PickerUISettings;
 import com.example.readnovel.Adapter.ChapterAdapter;
 import com.example.readnovel.Adapter.LoadMoreAdapter;
-import com.example.readnovel.Model.Chapter;
+import com.example.readnovel.Model.CategoryLink;
 import com.example.readnovel.Model.Comic;
 import com.example.readnovel.R;
 import com.example.readnovel.Untils.Link;
@@ -39,7 +39,7 @@ import java.util.Objects;
 public class CategoryActivity extends AppCompatActivity {
     private RecyclerView mRvComic;
 
-    private ArrayList<Chapter> lstTheLoai;
+    private ArrayList<CategoryLink> lstTheLoai;
     private ArrayList<Comic> lstComic;
     private ArrayList<String> lstName;
 
@@ -305,7 +305,7 @@ public class CategoryActivity extends AppCompatActivity {
                         for (Element element : category) {
                             String url = element.attr("href");
                             String name = element.text();
-                            lstTheLoai.add(new Chapter(name, url));
+                            lstTheLoai.add(new CategoryLink(name, url));
                             lstName.add(name);
                         }
 

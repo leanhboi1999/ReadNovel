@@ -195,21 +195,6 @@ public class PageComicActivity extends AppCompatActivity implements View.OnClick
                     @Override
                     public void onResponse(String response) {
                         Document document = Jsoup.parse(response);
-                        //load list chapter
-                        Elements chapx = document.select("div.list-chapter");
-                        Elements chap = chapx.select("li.row");
-                        Elements aElements = chap.select("a");
-                        for (Element element : aElements) {
-                            String urlChap = element.attr("href");
-                            String nameChap = element.text();
-                            lstChapNormal.add(new Chapter(nameChap, urlChap));
-                        }
-
-                        for (int i = 0; i < lstChapNormal.size(); i++) {
-                            String x1 = lstChapNormal.get(lstChapNormal.size() - (i + 1)).getName();
-                            String x2 = lstChapNormal.get(lstChapNormal.size() - (i + 1)).getUrl();
-                            lstChapter.add(new Chapter(x1, x2));
-                        }
                         //load thumbnail
                         Elements contents = document.select("div.detail-info");
                         Element image = contents.select("img").first();
@@ -262,11 +247,24 @@ public class PageComicActivity extends AppCompatActivity implements View.OnClick
                         theodoi = view.text();
                         mViewTv.setText(theodoi);
 
-                        /*Nội dung*/
+                        //Load content
                         Elements detail = document.select("div.detail-content");
                         Element del = detail.select("p").get(0);
-                        String test2 = del.text().trim();
-                        Log.e("Test:", test2);
+                        //load list chapter
+                        Elements chapx = document.select("div.list-chapter");
+                        Elements chap = chapx.select("li.row");
+                        Elements aElements = chap.select("a");
+                        for (Element element : aElements) {
+                            String urlChap = element.attr("href");
+                            String nameChap = element.text();
+                            lstChapNormal.add(new Chapter(title, theodoi, thumb, nameChap, urlChap));
+                        }
+
+                        for (int i = 0; i < lstChapNormal.size(); i++) {
+                            String x1 = lstChapNormal.get(lstChapNormal.size() - (i + 1)).getName();
+                            String x2 = lstChapNormal.get(lstChapNormal.size() - (i + 1)).getUrl();
+                            lstChapter.add(new Chapter(title, theodoi, thumb, x1, x2));
+                        }
                         mRvChapter.post(new Runnable() {
                             @Override
                             public void run() {

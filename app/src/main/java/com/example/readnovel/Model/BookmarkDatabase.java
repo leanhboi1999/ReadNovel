@@ -1,23 +1,29 @@
 package com.example.readnovel.Model;
 
-public class Chapter {
+
+import io.realm.RealmObject;
+
+public class BookmarkDatabase extends RealmObject {
     private String name;
     private String view;
     private String thumbal;
     private String chapter;
-    private String url;
+    private String linkChapter;
 
-    public Chapter(String name, String url) {
-        this.name = name;
-        this.url = url;
-    }
-
-    public Chapter(String name, String view, String thumbal, String chapter, String url) {
+    public BookmarkDatabase(String name, String view, String thumbal, String chapter, String linkChapter) {
         this.name = name;
         this.view = view;
         this.thumbal = thumbal;
         this.chapter = chapter;
-        this.url = url;
+        this.linkChapter = linkChapter;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getView() {
@@ -44,19 +50,14 @@ public class Chapter {
         this.chapter = chapter;
     }
 
-    public String getName() {
-        return name;
+    public String getLinkChapter() {
+        return linkChapter;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setLinkChapter(String linkChapter) {
+        this.linkChapter = linkChapter;
     }
 
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
+    public BookmarkDatabase() {
     }
 }

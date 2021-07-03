@@ -109,11 +109,9 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
         _Girl.showShimmer();
         _Boy.showShimmer();
 
+        //Update database
         Realm.init(this);
-        RealmConfiguration config = new RealmConfiguration
-                .Builder()
-                .deleteRealmIfMigrationNeeded()
-                .build();
+        RealmConfiguration config = RealmUtility.getDefaultConfig();
         Realm.setDefaultConfiguration(config);
 
         loadComicNewupdate();
