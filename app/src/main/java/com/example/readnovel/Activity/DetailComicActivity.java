@@ -63,6 +63,11 @@ public class DetailComicActivity extends AppCompatActivity implements View.OnSys
         loadBook(URL_IMAGE);
         onSystemUiVisibilityChange(2);
         onHandleChapterBehavior();
+        onNextPrevButton();
+    }
+
+    private void onNextPrevButton() {
+
     }
 
     private void onHandleChapterBehavior() {
