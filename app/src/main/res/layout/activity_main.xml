@@ -46,7 +46,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="70dp"
 
-        android:background="@drawable/login_out_rview"
+        android:background="@drawable/rounded_border_button"
         android:backgroundTint="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
@@ -85,7 +85,7 @@
         android:layout_height="wrap_content"
 
         android:layout_marginTop="20dp"
-        android:background="@drawable/login_out_rview"
+        android:background="@drawable/rounded_border_button"
         android:backgroundTint="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.49"

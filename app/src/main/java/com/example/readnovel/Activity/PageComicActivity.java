@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -53,6 +54,9 @@ public class PageComicActivity extends AppCompatActivity implements View.OnClick
     private TextView mTvAuthor;
     private TextView mTvTrangThai;
     private TextView mTvTheLoai;
+
+    //Button bookmark ne
+    private Button btnBookmark;
 
     private String URL_COMIC;
     private String tacgia;

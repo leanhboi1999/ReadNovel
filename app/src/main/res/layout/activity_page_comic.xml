@@ -208,4 +208,21 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin" />
     </androidx.cardview.widget.CardView>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnBookmark"
+            style="@style/bookmarkButton"
+            android:layout_width="@dimen/dimens_224dp"
+            android:layout_marginEnd="@dimen/dimens_16dp"
+            android:layout_marginBottom="6dp"
+            android:layout_alignParentEnd="true"
+            android:backgroundTint="@color/darkPink"
+            android:text="Start Reading">
+        </androidx.appcompat.widget.AppCompatButton>
+
+
+    </RelativeLayout>
 </LinearLayout>
