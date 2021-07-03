@@ -3,20 +3,29 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Chapter;
+use App\Favorite;
 
-class ChapterController extends Controller
+class FavoriteController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    
     public function index($id)
     {
-        if($id == null) return 404;
-        return $chapter = Chapter::whereUsername($id)->get();
+        if($id == null) return http_response_code(404);
+        return $favorite = Favorite::whereUsername($id)->get();
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        
     }
 
     /**
@@ -27,7 +36,7 @@ class ChapterController extends Controller
      */
     public function store(Request $request)
     {
-        return $chapter = Chapter::create($request->all());
+        return $favorite = Favorite::create($request->all());
     }
 
     /**
@@ -38,8 +47,20 @@ class ChapterController extends Controller
      */
     public function show($id)
     {
-        if($id == null) return 404;
-        return $chapter = Chapter::whereName($id)->get();
+        if($id == null) return http_response_code(404);
+        return $favorite = Favorite::whereName($id)->get();
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        $favorite = Favorite::whereName($id)->get();
+        return $favorite->update($request->all());
     }
 
     /**
@@ -51,8 +72,8 @@ class ChapterController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $chapter = Chapter::whereName($id)->get();
-        return $chapter->update($request->all());
+        $favorite = Favorite::whereName($id)->get();
+        return $favorite->update($request->all());
     }
 
     /**
@@ -63,6 +84,6 @@ class ChapterController extends Controller
      */
     public function destroy($id)
     {
-        return $chapter = Chapter::whereName($id)->destroy();
+        return $favorite = Favorite::whereName($id)->destroy();
     }
 }

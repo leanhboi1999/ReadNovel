@@ -17,3 +17,5 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('chapter/{id}', 'ChapterController@index')->name('chapter.index');
 Route::resource('chapter', 'ChapterController');
+Route::get('favorite/{id}', 'FavoriteController@index')->name('favorite.index');
+Route::resource('favorite', 'FavoriteController');

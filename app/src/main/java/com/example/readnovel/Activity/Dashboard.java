@@ -42,6 +42,7 @@ import com.example.readnovel.Model.SliderItem;
 import com.example.readnovel.R;
 import com.example.readnovel.Untils.CheckConnect;
 import com.example.readnovel.Untils.Link;
+import com.example.readnovel.Untils.RealmUtility;
 import com.todkars.shimmer.ShimmerRecyclerView;
 
 import org.json.JSONException;
@@ -57,6 +58,7 @@ import java.util.List;
 import java.util.Objects;
 
 import io.realm.Realm;
+import io.realm.RealmConfiguration;
 import ss.com.bannerslider.banners.Banner;
 import ss.com.bannerslider.banners.RemoteBanner;
 import ss.com.bannerslider.views.BannerSlider;
@@ -106,11 +108,14 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
         _hotTrend.showShimmer();
         _Girl.showShimmer();
         _Boy.showShimmer();
+
         Realm.init(this);
-        //Set sự kiện cho search
-//        _searchAuto.addTextChangedListener(this);
-//        _searchAuto.setThreshold(0);
-        //Khởi tạo hàm xử lý
+        RealmConfiguration config = new RealmConfiguration
+                .Builder()
+                .deleteRealmIfMigrationNeeded()
+                .build();
+        Realm.setDefaultConfiguration(config);
+
         loadComicNewupdate();
         loadComicHottrend();
         loadComicGirl();
