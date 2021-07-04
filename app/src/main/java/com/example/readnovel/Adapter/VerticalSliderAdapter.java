@@ -28,6 +28,7 @@ import java.util.List;
 public class VerticalSliderAdapter extends RecyclerView.Adapter<VerticalSliderAdapter.SliderViewHolder> {
 
     private List<SliderItem> sliderItem;
+    private SliderItem item;
     private ViewPager2 viewPager2;
     private Context context;
     private final ArrayList<Comic> listBookmark;
@@ -76,7 +77,7 @@ public class VerticalSliderAdapter extends RecyclerView.Adapter<VerticalSliderAd
     @Override
     public void onBindViewHolder(@NonNull SliderViewHolder holder, int position) {
         holder.setImageView(sliderItem.get(position));
-
+//        holder.txtBookmark.setText(item.getName());
         if (position == sliderItem.size() - 2)
         {
             viewPager2.post(runnable);
@@ -84,11 +85,15 @@ public class VerticalSliderAdapter extends RecyclerView.Adapter<VerticalSliderAd
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final Comic item = listBookmark.get(position);
-                Intent intent = new Intent(context, PageComicActivity.class);
-                for (int i = 0; i < 10; i++) {
-                    intent.putExtra("url", item.getLinkComic());
+                ArrayList<Comic> list = new ArrayList<>();
+                for (int i= listBookmark.size()-1 ;i>(listBookmark.size()-6); i--)
+                {
+                    list.add(listBookmark.get(i));
                 }
+                final Comic item = list.get(position);
+                Intent intent = new Intent(context, PageComicActivity.class);
+                intent.putExtra("url", item.getLinkComic());
+
                 context.startActivity(intent);
             }
         });
@@ -107,15 +112,12 @@ public class VerticalSliderAdapter extends RecyclerView.Adapter<VerticalSliderAd
             super(itemView);
             imageView = itemView.findViewById(R.id.imgVerSlide);
             txtBookmark = itemView.findViewById(R.id.txtBookmark);
-            txtBookmark.setText(Name);
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
 
-                }
-            });
+
         }
-
+        void setName(SliderItem sliderItem) {
+            txtBookmark.setText(Name);
+        }
 
 
         void setImageView(SliderItem sliderItem){

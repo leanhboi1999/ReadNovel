@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -76,8 +77,9 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
     private ArrayList<Comic> _listHottrend;
     private ArrayList<Comic> _listGirl;
     private ArrayList<Comic> _listBoy;
+    private ArrayList<Comic> listBookmark;
     private List<SliderItem> sliderItems;
-
+    private List<SliderItem> sliderItemsForVer;
 //    private BannerSlider _sliderBanner;
     private ViewPager2 viewPager2;
     private SliderAdapter sliderAdapter;
@@ -126,6 +128,20 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
         loadComicHottrend();
         loadComicGirl();
         loadComicBoy();
+        loadHistory();
+    }
+
+    private void loadHistory() {
+        for (int i = bookmarks.size()-1;i>(bookmarks.size()-6);i--)
+        {
+            Bookmark bookmark = bookmarks.get(i);
+            sliderItemsForVer.add(new SliderItem(bookmark.getThumbal(),bookmark.getName()));
+            verSlierAdapter.setUrl(bookmark.getLinkChapter());
+            verSlierAdapter.setItems(sliderItemsForVer);
+            verSlierAdapter.setName(bookmark.getName());
+            verSlierAdapter.notifyDataSetChanged();
+        }
+
 
     }
 
@@ -134,8 +150,13 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
         bookmarks.clear();
         RealmResults<BookmarkDatabase> result = _myRealm.where(BookmarkDatabase.class).findAll();
         for(BookmarkDatabase database :result) {
-            bookmarks.add(new Bookmark(database.getName(), database.getView(), database.getThumbal(), database.getChapter(), database.getLinkChapter()));
+            bookmarks.add(new Bookmark(database.getName(),
+                    database.getView(), database.getThumbal(), database.getChapter(), database.getLinkChapter()));
+            listBookmark.add(new Comic(database.getName(),
+                    database.getView(), database.getThumbal(), database.getChapter(), database.getLinkChapter()));
+
         }
+
     }
 
     //Khởi tạo UI
@@ -148,13 +169,15 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
         _banner = new ArrayList<>();
         _urlBanner = new ArrayList<>();
         _search = new ArrayList<>();
+        listBookmark = new ArrayList<>();
         //Khởi tạo giao diện, bảo sao nó cứ null point mà không thấy báo lỗi
 
         //init Slider
         initSlider();
         sliderItems = new ArrayList<>();
+        sliderItemsForVer = new ArrayList<>();
         sliderAdapter = new SliderAdapter(sliderItems, viewPager2, _listUpdate);
-        verSlierAdapter = new VerticalSliderAdapter(sliderItems,vpMarkComic,_listUpdate);
+        verSlierAdapter = new VerticalSliderAdapter(sliderItemsForVer,vpMarkComic,listBookmark);
         viewPager2.setAdapter(sliderAdapter);
         vpMarkComic.setAdapter(verSlierAdapter);
 
@@ -264,6 +287,7 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
         else
         {
         vpMarkComic.setVisibility(View.VISIBLE);}
+
     }
 
     private void openTheLoai() {
@@ -371,11 +395,6 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
                             sliderAdapter.setItems(sliderItems);
                             sliderAdapter.notifyDataSetChanged();
 
-
-                            verSlierAdapter.setUrl(url);
-                            verSlierAdapter.setItems(sliderItems);
-                            verSlierAdapter.notifyDataSetChanged();
-                            verSlierAdapter.setName("Hiii");
                             //
 
                         }
