@@ -20,6 +20,9 @@ public class Chapter {
         this.url = url;
     }
 
+    public Chapter() {
+    }
+
     public String getView() {
         return view;
     }

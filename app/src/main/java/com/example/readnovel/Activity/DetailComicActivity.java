@@ -27,9 +27,16 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.readnovel.Adapter.ComicViewAdapter;
+import com.example.readnovel.Model.Chapter;
 import com.example.readnovel.Model.Image;
 import com.example.readnovel.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -46,6 +53,7 @@ public class DetailComicActivity extends AppCompatActivity implements View.OnSys
     private TextView txtChapName;
     private GestureDetector gestureDetector;
     private RelativeLayout rlChapter,rlChapterLayout;
+    private DatabaseReference mDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +72,29 @@ public class DetailComicActivity extends AppCompatActivity implements View.OnSys
         onSystemUiVisibilityChange(2);
         onHandleChapterBehavior();
         onNextPrevButton();
+        queryData();
+    }
+
+    private void queryData() {
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        Query allChapter = mDatabase.child("Thần Võ Thiên Tôn").child("0");
+        allChapter.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Chapter chap = snapshot.getValue(Chapter.class);
+                Log.d("firebase", chap.getName());
+                Log.d("firebase", chap.getChapter());
+                Log.d("firebase", chap.getUrl());
+                Log.d("firebase", chap.getThumbal());
+                Log.d("firebase", chap.getView());
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
     }
 
     private void onNextPrevButton() {
@@ -124,6 +155,7 @@ public class DetailComicActivity extends AppCompatActivity implements View.OnSys
                             lstImage.add(new Image(url));
                         }
                         Elements navigation = document.select("div.chapter-nav");
+                        Log.d("test", navigation.toString());
                         Element next = navigation.select("a").get(4);
                         String urlNext = next.attr("href");
                         Element prev = navigation.select("a").get(3);
