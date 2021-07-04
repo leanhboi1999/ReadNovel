@@ -54,8 +54,7 @@ public class LoadMoreAdapter extends RecyclerView.Adapter<LoadMoreAdapter.ViewHo
             @Override
             public void onClick(View view) {
                 boolean check = false;
-                RealmResults<ComicDatabase> results1 =
-                        myRealm.where(ComicDatabase.class).findAll();
+                RealmResults<ComicDatabase> results1 = myRealm.where(ComicDatabase.class).findAll();
                 for (ComicDatabase c : results1) {
                     if (c.getName() != null)
                         if (c.getName().equals(item.getName().trim())) {

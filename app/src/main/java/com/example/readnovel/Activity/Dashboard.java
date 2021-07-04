@@ -127,7 +127,8 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
 
     }
 
-
+    @Override
+    public void onBackPressed() { }
 
     private void loadBookmark() {
         Realm _myRealm = Realm.getDefaultInstance();
@@ -636,60 +637,63 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
 
     private void requestSearch() {
         _search.clear();
-        final String la = _searchAuto.getText().toString();
-        String keyword = la.replaceAll(" ", "+");
-        String urlSearch = Link.URL_SEARCH + keyword;
-        RequestQueue requestQueue = Volley.newRequestQueue(Dashboard.this);
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, urlSearch, new Response.Listener<String>() {
+        new Thread(new Runnable() {
             @Override
-            public void onResponse(String response) {
-                Document document = Jsoup.parse(response);
-                Elements all = document.select("div#ctl00_divCenter");
-                Elements sub = all.select(".item");
-                for (Element element : sub) {
-                    Element hinhanh = element.getElementsByTag("img").get(0);
-                    Element linktruyen = element.getElementsByTag("a").get(0);
-                    Element tentruyen = element.getElementsByTag("h3").get(0);
-                    String thumb;
-                    String thumb1 = hinhanh.attr("src");
-                    String thumb2 = hinhanh.attr("data-original");
-                    if (thumb2.equals("")) {
-                        thumb = thumb1;
-                    } else {
-                        thumb = thumb2;
-                    }
-                    String name = tentruyen.text();
+            public void run() {
+                final String la = _searchAuto.getText().toString();
+                String keyword = la.replaceAll(" ", "+");
+                String urlsearch = Link.URL_SEARCH + keyword;
+                RequestQueue requestQueue = Volley.newRequestQueue(Dashboard.this);
+                StringRequest stringRequest = new StringRequest(Request.Method.GET, urlsearch, new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Document document = Jsoup.parse(response);
+                        Elements all = document.select("div#ctl00_divCenter");
+                        Elements sub = all.select(".item");
+                        for (Element element : sub) {
+                            Element hinhanh = element.getElementsByTag("img").get(0);
+                            Element linktruyen = element.getElementsByTag("a").get(0);
+                            Element tentruyen = element.getElementsByTag("h3").get(0);
+                            String thumb;
+                            String thumb1 = hinhanh.attr("src");
+                            String thumb2 = hinhanh.attr("data-original");
+                            if (thumb2.equals("")) {
+                                thumb = thumb1;
+                            } else {
+                                thumb = thumb2;
+                            }
+                            String name = tentruyen.text();
 
-                    String link = linktruyen.attr("href");
-                    if (thumb.startsWith("http:") || thumb.startsWith("https:")) {
-                    } else {
-                        thumb = "http:" + thumb;
-                    }
-                    _search.add(new Search(name, thumb, link));
-                }
-                _seachAdapter = new SearchAdapter(Dashboard.this, R.layout.item_custom_search, _search);
-                _searchAuto.setAdapter(_seachAdapter);
-                _seachAdapter.notifyDataSetChanged();
+                            String link = linktruyen.attr("href");
+                            if (thumb.startsWith("http:") || thumb.startsWith("https:")) {
+                            } else {
+                                thumb = "http:" + thumb;
+                            }
+                            _search.add(new Search(name, thumb, link));
+                        }
+                        _seachAdapter = new SearchAdapter(Dashboard.this, R.layout.item_custom_search, _search);
+                        _searchAuto.setAdapter(_seachAdapter);
+                        _seachAdapter.notifyDataSetChanged();
 
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                NetworkResponse response = error.networkResponse;
-                if (error instanceof ServerError && response != null) {
-                    try {
-                        String res = new String(response.data,
-                                HttpHeaderParser.parseCharset(response.headers, "utf-8"));
-                        JSONObject obj = new JSONObject(res);
-                    } catch (UnsupportedEncodingException e1) {
-                        e1.printStackTrace();
                     }
-                    catch (JSONException e2) {
-                       e2.printStackTrace(); }
-                }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        NetworkResponse response = error.networkResponse;
+                        if (error instanceof ServerError && response != null) {
+                            try {
+                                String res = new String(response.data,
+                                        HttpHeaderParser.parseCharset(response.headers, "utf-8"));
+                                JSONObject obj = new JSONObject(res);
+                            } catch (UnsupportedEncodingException | JSONException e1) {
+                                e1.printStackTrace();
+                            }
+                        }
+                    }
+                });
+                requestQueue.add(stringRequest);
             }
-        }
-        );
+        }).start();
 
     }
 

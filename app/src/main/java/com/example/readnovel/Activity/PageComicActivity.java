@@ -95,13 +95,10 @@ public class PageComicActivity extends AppCompatActivity implements View.OnClick
     private TextView mUpdateTv;
     private TextView mViewTv;
     private Spinner mSpinnerSort;
-    private Realm myRealm;
     private Toolbar mToolbar;
     private Realm _myRealm = Realm.getDefaultInstance();
     private ImageView imgFindChap;
     private DatabaseReference mDatabase;
-
-
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -226,14 +223,18 @@ public class PageComicActivity extends AppCompatActivity implements View.OnClick
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+        Intent intent = new Intent(PageComicActivity.this, Dashboard.class);
+        startActivity(intent);
     }
 
     private void addToDB(String title, String chapter, String thumb, String view, String url) {
-
+        Log.d("null", title);
+        Log.d("null", chapter);
+        Log.d("null", thumb);
+        Log.d("null", view);
+        Log.d("null", url);
         boolean check = false;
-        RealmResults<ComicDatabase> results1 =
-                myRealm.where(ComicDatabase.class).findAll();
+        RealmResults<ComicDatabase> results1 = _myRealm.where(ComicDatabase.class).findAll();
         for (ComicDatabase c : results1) {
             if (c.getName() != null)
                 if (c.getName().equals(title)) {
@@ -241,20 +242,18 @@ public class PageComicActivity extends AppCompatActivity implements View.OnClick
                     check = true;
                     Log.e("check:", String.valueOf(check));
                     break;
-
                 }
         }
 
         if (!check) {
-            myRealm.beginTransaction();
-            ComicDatabase comic = myRealm.createObject(ComicDatabase.class);
+            _myRealm.beginTransaction();
+            ComicDatabase comic = _myRealm.createObject(ComicDatabase.class);
             comic.setName(title);
             comic.setChapter(chapter);
-
             comic.setThumbal(thumb);
             comic.setView(view);
             comic.setUrl(url);
-            myRealm.commitTransaction();
+            _myRealm.commitTransaction();
             Toast.makeText(this, "Đã lưu truyện " + title + " vào mục yêu thích !", Toast.LENGTH_SHORT).show();
         }
     }

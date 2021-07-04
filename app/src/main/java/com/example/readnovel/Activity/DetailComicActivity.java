@@ -54,6 +54,7 @@ public class DetailComicActivity extends AppCompatActivity implements View.OnSys
     private GestureDetector gestureDetector;
     private RelativeLayout rlChapter,rlChapterLayout;
     private DatabaseReference mDatabase;
+    private String urlBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +74,13 @@ public class DetailComicActivity extends AppCompatActivity implements View.OnSys
         onHandleChapterBehavior();
         onNextPrevButton();
         queryData();
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(DetailComicActivity.this, PageComicActivity.class);
+        intent.putExtra("url", urlBack);
+        startActivity(intent);
     }
 
     private void queryData() {
@@ -155,13 +163,8 @@ public class DetailComicActivity extends AppCompatActivity implements View.OnSys
                             lstImage.add(new Image(url));
                         }
                         Elements navigation = document.select("div.chapter-nav");
-                        Log.d("test", navigation.toString());
-                        Element next = navigation.select("a").get(4);
-                        String urlNext = next.attr("href");
-                        Element prev = navigation.select("a").get(3);
-                        String urlPrev = prev.attr("href");
-                        Log.d("test", urlNext);
-                        Log.d("test", urlPrev);
+                        Element next = navigation.select("a").get(1);
+                        urlBack = next.attr("href");
                         mRvComic.post(new Runnable() {
                             @Override
                             public void run() {
