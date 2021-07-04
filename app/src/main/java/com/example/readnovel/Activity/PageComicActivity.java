@@ -158,13 +158,15 @@ public class PageComicActivity extends AppCompatActivity implements View.OnClick
         handleQuickAction();
     }
 
-    private void handleQuickAction() {
-        QuickAction.setDefaultColor(ResourcesCompat.getColor(getResources(),R.color.lightPink,null));
-        QuickAction.setDefaultTextColor(Color.WHITE);
-    private void addFirebase() {
+     private void addFirebase() {
         mDatabase = FirebaseDatabase.getInstance().getReference();
         mDatabase.child(title).setValue(lstChapNormal);
     }
+
+    private void handleQuickAction() {
+        QuickAction.setDefaultColor(ResourcesCompat.getColor(getResources(),R.color.lightPink,null));
+        QuickAction.setDefaultTextColor(Color.WHITE);
+
 
         quickAction = new QuickAction(this,QuickAction.HORIZONTAL);
         quickAction.setColorRes(R.color.darkPink);
@@ -323,7 +325,7 @@ public class PageComicActivity extends AppCompatActivity implements View.OnClick
                         }
 
                         for (int i = 0; i < lstChapNormal.size(); i++) {
-                            String x1 = lstChapNormal.get(lstChapNormal.size() - (i + 1)).getName();
+                            String x1 = lstChapNormal.get(lstChapNormal.size() - (i + 1)).getChapter();
                             String x2 = lstChapNormal.get(lstChapNormal.size() - (i + 1)).getUrl();
                             lstChapter.add(new Chapter(title, theodoi, thumb, x1, x2));
                         }

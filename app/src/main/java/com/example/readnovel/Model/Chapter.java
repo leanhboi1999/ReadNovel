@@ -1,11 +1,11 @@
 package com.example.readnovel.Model;
 
 public class Chapter {
-    private String name;
+    private String name; //Tên truyện
     private String view;
     private String thumbal;
-    private String chapter;
-    private String url;
+    private String chapter; //Tên chapter
+    private String url; //Link chapter
 
     public Chapter(String name, String url) {
         this.name = name;
