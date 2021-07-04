@@ -1,22 +1,22 @@
 package com.example.readnovel.Model;
 
-public class Comic {
+public class Bookmark {
     private String name;
     private String view;
     private String thumbal;
     private String chapter;
-    private String linkComic;
+    private String linkChapter;
 
+    public Bookmark() {
+    }
 
-    public Comic(String name, String view, String thumbal, String chapter, String linkComic) {
+    public Bookmark(String name, String view, String thumbal, String chapter, String linkChapter) {
         this.name = name;
         this.view = view;
         this.thumbal = thumbal;
         this.chapter = chapter;
-        this.linkComic = linkComic;
+        this.linkChapter = linkChapter;
     }
-
-
 
     public String getName() {
         return name;
@@ -50,11 +50,11 @@ public class Comic {
         this.chapter = chapter;
     }
 
-    public String getLinkComic() {
-        return linkComic;
+    public String getLinkChapter() {
+        return linkChapter;
     }
 
-    public void setLinkComic(String linkComic) {
-        this.linkComic = linkComic;
+    public void setLinkChapter(String linkChapter) {
+        this.linkChapter = linkChapter;
     }
 }

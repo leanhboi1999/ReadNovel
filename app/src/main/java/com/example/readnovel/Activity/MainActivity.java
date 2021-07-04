@@ -4,10 +4,8 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,25 +15,24 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-import com.example.readnovel.FbInstanceIdService;
 import com.example.readnovel.Model.User;
 import com.example.readnovel.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.installations.FirebaseInstallations;
+
 
 import java.util.Objects;
 
+import io.realm.Realm;
+
 public class MainActivity extends AppCompatActivity {
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    public static User userConfirm;
     TextView text_first;
     TextInputEditText username,password;
     Button button_first, button_second;
@@ -47,7 +44,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         //Check Permission
         int permission_internet = ContextCompat.checkSelfPermission(this, Manifest.permission.INTERNET);
         int permission_read_external_storage = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE);
@@ -113,6 +109,7 @@ public class MainActivity extends AppCompatActivity {
                         assert doc != null;
                         User login = new User(doc.get("email").toString(), doc.get("username").toString(), doc.get("password").toString());
                         if(login.getPassword().equals(password_text)) {
+                            userConfirm = login;
                             Intent i = new Intent(MainActivity.this, Dashboard.class);
                             startActivity(i);
                         } else {

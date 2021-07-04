@@ -1,5 +1,6 @@
 package com.example.readnovel.Activity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -7,10 +8,13 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.text.method.MovementMethod;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -20,6 +24,7 @@ import android.widget.Toolbar;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -33,9 +38,14 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.example.readnovel.Adapter.ChapterAdapter;
+import com.example.readnovel.Model.BookmarkDatabase;
 import com.example.readnovel.Model.Chapter;
+import com.example.readnovel.Model.Comic;
 import com.example.readnovel.Model.ComicDatabase;
+import com.example.readnovel.Model.ComicFirebase;
 import com.example.readnovel.R;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -46,6 +56,8 @@ import java.util.ArrayList;
 
 import io.realm.Realm;
 import io.realm.RealmResults;
+import me.piruin.quickaction.ActionItem;
+import me.piruin.quickaction.QuickAction;
 
 public class PageComicActivity extends AppCompatActivity implements View.OnClickListener {
     private ImageView mImgThumb;
@@ -53,6 +65,14 @@ public class PageComicActivity extends AppCompatActivity implements View.OnClick
     private TextView mTvAuthor;
     private TextView mTvTrangThai;
     private TextView mTvTheLoai;
+    private TextView mTvDes;
+    private TextView txtFindChap;
+    //QuickAction
+    private QuickAction quickAction;
+    private QuickAction quickIntent;
+
+    //Button bookmark ne
+    private Button btnBookmark;
 
     private String URL_COMIC;
     private String tacgia;
@@ -72,6 +92,11 @@ public class PageComicActivity extends AppCompatActivity implements View.OnClick
     private Spinner mSpinnerSort;
     private Realm myRealm;
     private Toolbar mToolbar;
+    private Realm _myRealm = Realm.getDefaultInstance();
+    private ImageView imgFindChap;
+    private DatabaseReference mDatabase;
+
+
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -87,7 +112,6 @@ public class PageComicActivity extends AppCompatActivity implements View.OnClick
                 onBackPressed();
             }
         });
-        myRealm = Realm.getDefaultInstance();
         Intent intent = getIntent();
         URL_COMIC = intent.getStringExtra("url");
         ArrayList<String> lstSpinner = new ArrayList<>();
@@ -131,9 +155,43 @@ public class PageComicActivity extends AppCompatActivity implements View.OnClick
             }
         });
         loadBook(URL_COMIC);
+        handleQuickAction();
+    }
 
+    private void handleQuickAction() {
+        QuickAction.setDefaultColor(ResourcesCompat.getColor(getResources(),R.color.lightPink,null));
+        QuickAction.setDefaultTextColor(Color.WHITE);
+    private void addFirebase() {
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        mDatabase.child(title).setValue(lstChapNormal);
+    }
+
+        quickAction = new QuickAction(this,QuickAction.HORIZONTAL);
+        quickAction.setColorRes(R.color.darkPink);
+        quickAction.setTextColorRes(R.color.white);
+        String title = txtFindChap.getText().toString();
+
+        ActionItem desItem = new ActionItem(1,"Đi đến >>",R.drawable.comic);
+
+        quickAction.addActionItem(desItem);
+        imgFindChap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                quickAction.show(view);
+            }
+        });
+        quickAction.setOnActionItemClickListener(new QuickAction.OnActionItemClickListener() {
+            @Override
+            public void onItemClick(ActionItem item) {
+                onPressFindChapter();
+            }
+        });
 
     }
+    //Find Chap o day ne
+    private void onPressFindChapter() {
+    }
+
 
     @Override
     public void onBackPressed() {
@@ -161,6 +219,7 @@ public class PageComicActivity extends AppCompatActivity implements View.OnClick
             ComicDatabase comic = myRealm.createObject(ComicDatabase.class);
             comic.setName(title);
             comic.setChapter(chapter);
+
             comic.setThumbal(thumb);
             comic.setView(view);
             comic.setUrl(url);
@@ -195,21 +254,6 @@ public class PageComicActivity extends AppCompatActivity implements View.OnClick
                     @Override
                     public void onResponse(String response) {
                         Document document = Jsoup.parse(response);
-                        //load list chapter
-                        Elements chapx = document.select("div.list-chapter");
-                        Elements chap = chapx.select("li.row");
-                        Elements aElements = chap.select("a");
-                        for (Element element : aElements) {
-                            String urlChap = element.attr("href");
-                            String nameChap = element.text();
-                            lstChapNormal.add(new Chapter(nameChap, urlChap));
-                        }
-
-                        for (int i = 0; i < lstChapNormal.size(); i++) {
-                            String x1 = lstChapNormal.get(lstChapNormal.size() - (i + 1)).getName();
-                            String x2 = lstChapNormal.get(lstChapNormal.size() - (i + 1)).getUrl();
-                            lstChapter.add(new Chapter(x1, x2));
-                        }
                         //load thumbnail
                         Elements contents = document.select("div.detail-info");
                         Element image = contents.select("img").first();
@@ -221,6 +265,7 @@ public class PageComicActivity extends AppCompatActivity implements View.OnClick
                         Element tit = tieude.select("h1").first();
                         title = tit.text();
                         mTvName.setText(title);
+                        loadTextButton(title);
                         //time update
                         Element update = tieude.select("time").first();
                         updatetime = update.text();
@@ -262,11 +307,27 @@ public class PageComicActivity extends AppCompatActivity implements View.OnClick
                         theodoi = view.text();
                         mViewTv.setText(theodoi);
 
-                        /*Nội dung*/
+                        //Load content
                         Elements detail = document.select("div.detail-content");
                         Element del = detail.select("p").get(0);
-                        String test2 = del.text().trim();
-                        Log.e("Test:", test2);
+                        String detailComic = del.text().trim();
+                        mTvDes.setText(detailComic);
+                        //load list chapter
+                        Elements chapx = document.select("div.list-chapter");
+                        Elements chap = chapx.select("li.row");
+                        Elements aElements = chap.select("a");
+                        for (Element element : aElements) {
+                            String urlChap = element.attr("href");
+                            String nameChap = element.text();
+                            lstChapNormal.add(new Chapter(title, theodoi, thumb, nameChap, urlChap));
+                        }
+
+                        for (int i = 0; i < lstChapNormal.size(); i++) {
+                            String x1 = lstChapNormal.get(lstChapNormal.size() - (i + 1)).getName();
+                            String x2 = lstChapNormal.get(lstChapNormal.size() - (i + 1)).getUrl();
+                            lstChapter.add(new Chapter(title, theodoi, thumb, x1, x2));
+                        }
+                        addFirebase();
                         mRvChapter.post(new Runnable() {
                             @Override
                             public void run() {
@@ -307,14 +368,59 @@ public class PageComicActivity extends AppCompatActivity implements View.OnClick
         }).start();
     }
 
+    @SuppressLint("SetTextI18n")
+    private void loadTextButton(String title) {
+        boolean check = false;
+        RealmResults<BookmarkDatabase> result = _myRealm.where(BookmarkDatabase.class).findAll();
+        for(BookmarkDatabase database : result) {
+            if(database.getName().equals(title)) {
+                if(database.getChapter() != null) {
+                    check = true;
+                    btnBookmark.setText("Xem tiếp " + database.getChapter());
+                }
+            }
+        }
+
+        if(!check) {
+            btnBookmark.setText("Bắt đầu xem CHAPTER 1");
+        }
+
+    }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_Like:
                 addToDB(title, lstChapNormal.get(0).getName(), thumb, theodoi, URL_COMIC);
                 break;
+            case R.id.btnBookmark:
+                loadBookmark();
+                break;
             default:
                 break;
+        }
+    }
+
+    private void loadBookmark() {
+        boolean check = false;
+        RealmResults<BookmarkDatabase> result = _myRealm.where(BookmarkDatabase.class).findAll();
+        for(BookmarkDatabase database : result) {
+            if(database.getName().equals(title)) {
+                if(database.getChapter() != null) {
+                    check = true;
+                    Intent i = new Intent(PageComicActivity.this, DetailComicActivity.class);
+                    i.putExtra("url",database.getLinkChapter());
+                    startActivity(i);
+                    break;
+                }
+            }
+        }
+
+        if(!check) {
+            String url = lstChapNormal.get(0).getUrl();
+            Intent intent = new Intent(PageComicActivity.this, DetailComicActivity.class);
+            intent.putExtra("url", url);
+            startActivity(intent);
         }
     }
 
@@ -364,6 +470,12 @@ public class PageComicActivity extends AppCompatActivity implements View.OnClick
         mSpinnerSort = findViewById(R.id.spinnerSort);
         ImageButton mLikeBtn = findViewById(R.id.btn_Like);
         mLikeBtn.setOnClickListener(this);
+        btnBookmark = findViewById(R.id.btnBookmark);
+        btnBookmark.setOnClickListener(this);
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mTvDes = findViewById(R.id.tv_Des);
+        mTvDes.setMovementMethod(new ScrollingMovementMethod());
+        imgFindChap = findViewById(R.id.imgFindChap);
+        txtFindChap = findViewById(R.id.txtFindChap);
     }
 }

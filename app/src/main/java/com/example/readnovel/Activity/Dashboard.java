@@ -36,6 +36,8 @@ import com.android.volley.toolbox.Volley;
 import com.example.readnovel.Adapter.ComicAdapter;
 import com.example.readnovel.Adapter.SearchAdapter;
 import com.example.readnovel.Adapter.SliderAdapter;
+import com.example.readnovel.Model.Bookmark;
+import com.example.readnovel.Model.BookmarkDatabase;
 import com.example.readnovel.Model.Comic;
 import com.example.readnovel.Model.Search;
 import com.example.readnovel.Model.SliderItem;
@@ -59,6 +61,7 @@ import java.util.Objects;
 
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
+import io.realm.RealmResults;
 import ss.com.bannerslider.banners.Banner;
 import ss.com.bannerslider.banners.RemoteBanner;
 import ss.com.bannerslider.views.BannerSlider;
@@ -93,7 +96,9 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
     //Khai báo Adapter;
     private ComicAdapter _newUpdateAdapter;
     private SearchAdapter _seachAdapter;
+    //Khai báo truy vấn database
 
+    private ArrayList<Bookmark> bookmarks = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -109,18 +114,28 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
         _Girl.showShimmer();
         _Boy.showShimmer();
 
+        //Update database
         Realm.init(this);
-        RealmConfiguration config = new RealmConfiguration
-                .Builder()
-                .deleteRealmIfMigrationNeeded()
-                .build();
+        RealmConfiguration config = RealmUtility.getDefaultConfig();
         Realm.setDefaultConfiguration(config);
 
+        loadBookmark();
         loadComicNewupdate();
         loadComicHottrend();
         loadComicGirl();
         loadComicBoy();
 
+    }
+
+
+
+    private void loadBookmark() {
+        Realm _myRealm = Realm.getDefaultInstance();
+        bookmarks.clear();
+        RealmResults<BookmarkDatabase> result = _myRealm.where(BookmarkDatabase.class).findAll();
+        for(BookmarkDatabase database :result) {
+            bookmarks.add(new Bookmark(database.getName(), database.getView(), database.getThumbal(), database.getChapter(), database.getLinkChapter()));
+        }
     }
 
     //Khởi tạo UI

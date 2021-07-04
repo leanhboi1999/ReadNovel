@@ -63,17 +63,19 @@
             android:layout_height="match_parent"
             >
             <!--android:layout_alignParentBottom="true"-->
+
             <TextView
                 android:id="@+id/tvName"
-                android:layout_weight="1"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
+                android:layout_weight="1"
                 android:fontFamily="@font/roboto_bold"
-                android:padding="8dp"
                 android:gravity="center"
+                android:padding="8dp"
                 android:text="@string/nameComicDetail"
                 android:textColor="#000"
                 android:textSize="16sp" />
+
             <TextView
                 android:id="@+id/tv_View"
                 android:layout_width="match_parent"

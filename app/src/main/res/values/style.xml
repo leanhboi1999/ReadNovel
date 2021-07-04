@@ -23,8 +23,25 @@
         <item name="android:textColor">@color/black</item>
     </style>
     <style name="loginButton" parent="viewParent">
-        <item name="android:background">@drawable/login_out_rview</item>
+        <item name="android:background">@drawable/rounded_border_button</item>
         <item name="android:textColor">@color/yellow_500</item>
         <item name="android:textStyle">bold</item>
+    </style>
+    <style name="bookmarkButton" parent="viewParent">
+        <item name="android:background">@drawable/rounded_border_button</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textStyle">bold</item>
+
+    </style>
+
+    <style name="ChromeStylePopup" parent="android:Widget.TextView">
+        <item name="android:gravity">center</item>
+        <item name="android:minHeight">50dp</item>
+        <item name="android:minWidth">75dp</item>
+        <item name="android:maxWidth">@dimen/dimens_200dp</item>
+        <item name="android:padding">6dp</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceMedium</item>
     </style>
 </resources>

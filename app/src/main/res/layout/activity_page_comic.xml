@@ -154,11 +154,20 @@
                     android:text="@string/update"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_normal" />
+                <TextView
+                    android:id="@+id/tv_Des"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:isScrollContainer="true"
+                    android:scrollbars="vertical"
+                    android:inputType="textMultiLine"
 
+                    />
             </LinearLayout>
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
+
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -167,19 +176,20 @@
         app:cardCornerRadius="7dp"
         app:cardElevation="7dp">
 
-
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="0dp"
-                android:fontFamily="@font/roboto_bold"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:layout_weight="1"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="6dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:fontFamily="@font/roboto_bold"
                 android:padding="8dp"
                 android:text="@string/categoryComic"
                 android:textColor="#000"
@@ -189,8 +199,52 @@
                 android:id="@+id/spinnerSort"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="26dp"
+                android:layout_marginStart="6dp"
+                android:layout_alignParentStart="true"
                 android:backgroundTint="@color/background" />
-        </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:orientation="vertical">
+            <com.google.android.material.textfield.TextInputLayout
+
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="130dp"
+                android:layout_height="wrap_content"
+                android:hint="Chapter:"
+                android:layout_alignParentEnd="true"
+
+                android:paddingEnd="8dp"
+
+                android:textColorHint="@color/grey5"
+                android:theme="@style/CustomOutlineBox"
+                app:hintTextColor="@color/centerColor"
+                app:boxStrokeColor="@color/centerColor">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txtFindChap"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/search"
+                    android:maxLines="1"
+                    android:inputType="number"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+                <ImageView
+                    android:id="@+id/imgFindChap"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_gravity="end"
+                    android:layout_marginEnd="@dimen/dimens_10dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/findchapter"></ImageView>
+            </LinearLayout>
+        </RelativeLayout>
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
@@ -202,10 +256,30 @@
         app:cardElevation="7dp">
 
 
+
+
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvChapter"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin" />
     </androidx.cardview.widget.CardView>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnBookmark"
+            style="@style/bookmarkButton"
+            android:layout_width="@dimen/dimens_224dp"
+            android:layout_marginEnd="@dimen/dimens_16dp"
+            android:layout_marginBottom="6dp"
+            android:layout_alignParentEnd="true"
+            android:backgroundTint="@color/darkPink"
+            android:text="Start Reading">
+        </androidx.appcompat.widget.AppCompatButton>
+
+
+    </RelativeLayout>
 </LinearLayout>
