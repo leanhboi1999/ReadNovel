@@ -123,6 +123,7 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
         Realm.init(this);
         RealmConfiguration config = RealmUtility.getDefaultConfig();
         Realm.setDefaultConfiguration(config);
+
         loadBookmark();
         loadComicNewupdate();
         loadComicHottrend();
@@ -144,6 +145,8 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
 
 
     }
+
+
 
     private void loadBookmark() {
         Realm _myRealm = Realm.getDefaultInstance();

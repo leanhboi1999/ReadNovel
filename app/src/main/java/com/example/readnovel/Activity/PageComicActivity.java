@@ -40,8 +40,12 @@ import com.bumptech.glide.Glide;
 import com.example.readnovel.Adapter.ChapterAdapter;
 import com.example.readnovel.Model.BookmarkDatabase;
 import com.example.readnovel.Model.Chapter;
+import com.example.readnovel.Model.Comic;
 import com.example.readnovel.Model.ComicDatabase;
+import com.example.readnovel.Model.ComicFirebase;
 import com.example.readnovel.R;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -90,6 +94,7 @@ public class PageComicActivity extends AppCompatActivity implements View.OnClick
     private Toolbar mToolbar;
     private Realm _myRealm = Realm.getDefaultInstance();
     private ImageView imgFindChap;
+    private DatabaseReference mDatabase;
 
 
 
@@ -107,7 +112,6 @@ public class PageComicActivity extends AppCompatActivity implements View.OnClick
                 onBackPressed();
             }
         });
-        myRealm = Realm.getDefaultInstance();
         Intent intent = getIntent();
         URL_COMIC = intent.getStringExtra("url");
         ArrayList<String> lstSpinner = new ArrayList<>();
@@ -157,6 +161,10 @@ public class PageComicActivity extends AppCompatActivity implements View.OnClick
     private void handleQuickAction() {
         QuickAction.setDefaultColor(ResourcesCompat.getColor(getResources(),R.color.lightPink,null));
         QuickAction.setDefaultTextColor(Color.WHITE);
+    private void addFirebase() {
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        mDatabase.child(title).setValue(lstChapNormal);
+    }
 
         quickAction = new QuickAction(this,QuickAction.HORIZONTAL);
         quickAction.setColorRes(R.color.darkPink);
@@ -319,6 +327,7 @@ public class PageComicActivity extends AppCompatActivity implements View.OnClick
                             String x2 = lstChapNormal.get(lstChapNormal.size() - (i + 1)).getUrl();
                             lstChapter.add(new Chapter(title, theodoi, thumb, x1, x2));
                         }
+                        addFirebase();
                         mRvChapter.post(new Runnable() {
                             @Override
                             public void run() {
@@ -373,7 +382,7 @@ public class PageComicActivity extends AppCompatActivity implements View.OnClick
         }
 
         if(!check) {
-            btnBookmark.setText("Bắt đầu xem");
+            btnBookmark.setText("Bắt đầu xem CHAPTER 1");
         }
 
     }
@@ -393,7 +402,26 @@ public class PageComicActivity extends AppCompatActivity implements View.OnClick
     }
 
     private void loadBookmark() {
+        boolean check = false;
+        RealmResults<BookmarkDatabase> result = _myRealm.where(BookmarkDatabase.class).findAll();
+        for(BookmarkDatabase database : result) {
+            if(database.getName().equals(title)) {
+                if(database.getChapter() != null) {
+                    check = true;
+                    Intent i = new Intent(PageComicActivity.this, DetailComicActivity.class);
+                    i.putExtra("url",database.getLinkChapter());
+                    startActivity(i);
+                    break;
+                }
+            }
+        }
 
+        if(!check) {
+            String url = lstChapNormal.get(0).getUrl();
+            Intent intent = new Intent(PageComicActivity.this, DetailComicActivity.class);
+            intent.putExtra("url", url);
+            startActivity(intent);
+        }
     }
 
     static class SavedState extends View.BaseSavedState {
