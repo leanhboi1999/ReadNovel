@@ -49,6 +49,7 @@ public class LoadMoreAdapter extends RecyclerView.Adapter<LoadMoreAdapter.ViewHo
         holder.tvChapter.setText(item.getChapter());
         holder.tvName.setText(item.getName());
         holder.tvView.setText(item.getView());
+      
         holder.btnFavorite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -104,6 +105,7 @@ public class LoadMoreAdapter extends RecyclerView.Adapter<LoadMoreAdapter.ViewHo
         final TextView tvChapter;
         final TextView tvName;
         final TextView tvView;
+
         final ImageView thumbnail;
         final ImageButton btnFavorite;
 
@@ -114,6 +116,7 @@ public class LoadMoreAdapter extends RecyclerView.Adapter<LoadMoreAdapter.ViewHo
             tvView = itemView.findViewById(R.id.tv_View);
             thumbnail = itemView.findViewById(R.id.imgThumb);
             btnFavorite = itemView.findViewById(R.id.btn_Like);
+
         }
     }
 }

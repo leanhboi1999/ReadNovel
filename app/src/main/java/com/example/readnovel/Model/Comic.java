@@ -7,6 +7,7 @@ public class Comic {
     private String chapter;
     private String linkComic;
 
+
     public Comic(String name, String view, String thumbal, String chapter, String linkComic) {
         this.name = name;
         this.view = view;
@@ -14,6 +15,8 @@ public class Comic {
         this.chapter = chapter;
         this.linkComic = linkComic;
     }
+
+
 
     public String getName() {
         return name;

@@ -8,6 +8,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.text.method.MovementMethod;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -22,6 +24,7 @@ import android.widget.Toolbar;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -49,6 +52,8 @@ import java.util.ArrayList;
 
 import io.realm.Realm;
 import io.realm.RealmResults;
+import me.piruin.quickaction.ActionItem;
+import me.piruin.quickaction.QuickAction;
 
 public class PageComicActivity extends AppCompatActivity implements View.OnClickListener {
     private ImageView mImgThumb;
@@ -56,6 +61,11 @@ public class PageComicActivity extends AppCompatActivity implements View.OnClick
     private TextView mTvAuthor;
     private TextView mTvTrangThai;
     private TextView mTvTheLoai;
+    private TextView mTvDes;
+    private TextView txtFindChap;
+    //QuickAction
+    private QuickAction quickAction;
+    private QuickAction quickIntent;
 
     //Button bookmark ne
     private Button btnBookmark;
@@ -79,6 +89,9 @@ public class PageComicActivity extends AppCompatActivity implements View.OnClick
     private Realm myRealm;
     private Toolbar mToolbar;
     private Realm _myRealm = Realm.getDefaultInstance();
+    private ImageView imgFindChap;
+
+
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -138,8 +151,38 @@ public class PageComicActivity extends AppCompatActivity implements View.OnClick
             }
         });
         loadBook(URL_COMIC);
+        handleQuickAction();
     }
 
+    private void handleQuickAction() {
+        QuickAction.setDefaultColor(ResourcesCompat.getColor(getResources(),R.color.lightPink,null));
+        QuickAction.setDefaultTextColor(Color.WHITE);
+
+        quickAction = new QuickAction(this,QuickAction.HORIZONTAL);
+        quickAction.setColorRes(R.color.darkPink);
+        quickAction.setTextColorRes(R.color.white);
+        String title = txtFindChap.getText().toString();
+
+        ActionItem desItem = new ActionItem(1,"Đi đến >>",R.drawable.comic);
+
+        quickAction.addActionItem(desItem);
+        imgFindChap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                quickAction.show(view);
+            }
+        });
+        quickAction.setOnActionItemClickListener(new QuickAction.OnActionItemClickListener() {
+            @Override
+            public void onItemClick(ActionItem item) {
+                onPressFindChapter();
+            }
+        });
+
+    }
+    //Find Chap o day ne
+    private void onPressFindChapter() {
+    }
 
 
     @Override
@@ -168,6 +211,7 @@ public class PageComicActivity extends AppCompatActivity implements View.OnClick
             ComicDatabase comic = myRealm.createObject(ComicDatabase.class);
             comic.setName(title);
             comic.setChapter(chapter);
+
             comic.setThumbal(thumb);
             comic.setView(view);
             comic.setUrl(url);
@@ -258,6 +302,8 @@ public class PageComicActivity extends AppCompatActivity implements View.OnClick
                         //Load content
                         Elements detail = document.select("div.detail-content");
                         Element del = detail.select("p").get(0);
+                        String detailComic = del.text().trim();
+                        mTvDes.setText(detailComic);
                         //load list chapter
                         Elements chapx = document.select("div.list-chapter");
                         Elements chap = chapx.select("li.row");
@@ -321,7 +367,7 @@ public class PageComicActivity extends AppCompatActivity implements View.OnClick
             if(database.getName().equals(title)) {
                 if(database.getChapter() != null) {
                     check = true;
-                    btnBookmark.setText("Xem tiếp chap " + database.getChapter());
+                    btnBookmark.setText("Xem tiếp " + database.getChapter());
                 }
             }
         }
@@ -399,6 +445,9 @@ public class PageComicActivity extends AppCompatActivity implements View.OnClick
         btnBookmark = findViewById(R.id.btnBookmark);
         btnBookmark.setOnClickListener(this);
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
-
+        mTvDes = findViewById(R.id.tv_Des);
+        mTvDes.setMovementMethod(new ScrollingMovementMethod());
+        imgFindChap = findViewById(R.id.imgFindChap);
+        txtFindChap = findViewById(R.id.txtFindChap);
     }
 }
