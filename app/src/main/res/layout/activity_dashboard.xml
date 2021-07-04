@@ -111,7 +111,65 @@
                     android:textColor="#8E0A0A"
                     android:textSize="@dimen/text_normal" />
             </LinearLayout>
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin"
+                android:layout_marginRight="@dimen/margin"
+                android:layout_marginBottom="@dimen/margin"
+                app:cardCornerRadius="@dimen/border_card"
+                app:cardElevation="@dimen/border_card">
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:paddingStart="@dimen/margin"
+                        android:paddingEnd="@dimen/margin">
+
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:layout_marginTop="5dp"
+                            android:layout_marginRight="5dp"
+                            android:layout_marginBottom="3dp"
+                            android:id="@+id/btnMarkComic"
+                            android:layout_width="wrap_content"
+                            android:layout_height="@dimen/dimens_40dp"
+                            android:background="@drawable/button_loadmore"
+                            android:fontFamily="@font/roboto_medium"
+                            android:text="+"
+                            android:textColor="@color/loadmore_color"
+                            android:textStyle="bold"
+                            android:textSize="@dimen/size_28sp"
+                            android:textAlignment="center"/>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/roboto_regular"
+                            android:text="Truyện mới đọc gần đây"
+                            android:textColor="@color/black"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+
+                    <androidx.viewpager2.widget.ViewPager2
+                        android:id="@+id/vpMarkComic"
+                        android:layout_width="match_parent"
+                        android:layout_height="240dp"
+                        android:layout_margin="4dp"
+                        android:orientation="vertical"
+                        android:visibility="gone"
+
+                        />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

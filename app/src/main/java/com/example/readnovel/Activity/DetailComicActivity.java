@@ -2,11 +2,13 @@ package com.example.readnovel.Activity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -15,6 +17,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -27,16 +30,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.readnovel.Adapter.ComicViewAdapter;
-import com.example.readnovel.Model.Chapter;
 import com.example.readnovel.Model.Image;
 import com.example.readnovel.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -45,15 +41,20 @@ import org.jsoup.select.Elements;
 
 import java.util.ArrayList;
 
+import me.piruin.quickaction.ActionItem;
+import me.piruin.quickaction.QuickAction;
+
 public class DetailComicActivity extends AppCompatActivity implements View.OnSystemUiVisibilityChangeListener, View.OnClickListener {
     private ArrayList<Image> lstImage;
     private ComicViewAdapter adapter;
     private RecyclerView mRvComic;
-    private ImageView imgPreChap, imgNextChap;
+    private ImageView imgPreChap;
+    private ImageView imgNextChap;
+    private ImageView imgBack,imgHelp;
     private TextView txtChapName;
     private GestureDetector gestureDetector;
-    private RelativeLayout rlChapter,rlChapterLayout;
-    private DatabaseReference mDatabase;
+    private RelativeLayout rlChapter,rlChapterLayout,rlHeader;
+    private QuickAction quickAction;
     private String urlBack;
 
     @Override
@@ -73,7 +74,7 @@ public class DetailComicActivity extends AppCompatActivity implements View.OnSys
         onSystemUiVisibilityChange(2);
         onHandleChapterBehavior();
         onNextPrevButton();
-        queryData();
+        onPressHelp();
     }
 
     @Override
@@ -83,23 +84,38 @@ public class DetailComicActivity extends AppCompatActivity implements View.OnSys
         startActivity(intent);
     }
 
-    private void queryData() {
-        mDatabase = FirebaseDatabase.getInstance().getReference();
-        Query allChapter = mDatabase.child("Thần Võ Thiên Tôn").child("0");
-        allChapter.addListenerForSingleValueEvent(new ValueEventListener() {
+    private void onPressHelp() {
+        QuickAction.setDefaultColor(ResourcesCompat.getColor(getResources(),R.color.lightPink,null));
+        QuickAction.setDefaultTextColor(Color.WHITE);
+
+        quickAction = new QuickAction(this,QuickAction.VERTICAL);
+        quickAction.setColorRes(R.color.darkPink);
+        quickAction.setTextColorRes(R.color.white);
+
+
+        ActionItem helpItem = new ActionItem(1,"Help",R.drawable.exclamation);
+        ActionItem reportItem = new ActionItem(2,"Report",R.drawable.alert);
+
+
+        quickAction.addActionItem(helpItem);
+        quickAction.addActionItem(reportItem);
+        imgHelp.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Chapter chap = snapshot.getValue(Chapter.class);
-                Log.d("firebase", chap.getName());
-                Log.d("firebase", chap.getChapter());
-                Log.d("firebase", chap.getUrl());
-                Log.d("firebase", chap.getThumbal());
-                Log.d("firebase", chap.getView());
+            public void onClick(View view) {
+                quickAction.show(view);
             }
-
+        });
+        quickAction.setOnActionItemClickListener(new QuickAction.OnActionItemClickListener() {
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+            public void onItemClick(ActionItem item) {
+                if (item.getActionId()==1)
+                {
 
+                }
+                else if (item.getActionId()==2)
+                {
+
+                }
             }
         });
 
@@ -118,12 +134,13 @@ public class DetailComicActivity extends AppCompatActivity implements View.OnSys
 
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
-                if (dy > 0 && rlChapter.isShown()) {
+                if (dy > 0 && rlChapter.isShown() &&rlHeader.isShown()) {
                     rlChapter.setVisibility(View.GONE);
+                    rlHeader.setVisibility(View.GONE);
                 }
                 else if (dy < 0 ) {
                     rlChapter.setVisibility(View.VISIBLE);
-
+                    rlHeader.setVisibility(View.VISIBLE);
                 }
 
             }
@@ -163,8 +180,13 @@ public class DetailComicActivity extends AppCompatActivity implements View.OnSys
                             lstImage.add(new Image(url));
                         }
                         Elements navigation = document.select("div.chapter-nav");
-                        Element next = navigation.select("a").get(1);
-                        urlBack = next.attr("href");
+                        Log.d("test", navigation.toString());
+                        Element next = navigation.select("a").get(4);
+                        String urlNext = next.attr("href");
+                        Element prev = navigation.select("a").get(3);
+                        String urlPrev = prev.attr("href");
+                        Log.d("test", urlNext);
+                        Log.d("test", urlPrev);
                         mRvComic.post(new Runnable() {
                             @Override
                             public void run() {
@@ -226,7 +248,9 @@ public class DetailComicActivity extends AppCompatActivity implements View.OnSys
         txtChapName = findViewById(R.id.txtChapName);
         rlChapter = findViewById(R.id.rlChapter);
         rlChapterLayout = findViewById(R.id.rlChapterLayout);
-
+        imgBack = findViewById(R.id.imgBack);
+        imgHelp = findViewById(R.id.imgHelp);
+        rlHeader = findViewById(R.id.rlHeader);
     }
 
     @Override
