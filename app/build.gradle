@@ -4,6 +4,7 @@ plugins {
     id 'com.google.firebase.crashlytics'
 }
 
+
 android {
     compileSdkVersion 30
     buildToolsVersion "29.0.2"
@@ -62,18 +63,24 @@ dependencies {
     implementation 'com.todkars:shimmer-recyclerview:0.4.1'
     implementation 'com.google.android.material:material:1.4.0-beta01'
     // Recommended: Add the Firebase SDK for Google Analytics.
-    implementation 'com.google.firebase:firebase-analytics:19.0.0'
+    //implementation 'com.google.firebase:firebase-analytics:19.0.0'
     implementation "com.google.firebase:firebase-core:19.0.0"
-    implementation platform('com.google.firebase:firebase-bom:28.1.0')
+    //implementation platform('com.google.firebase:firebase-bom:28.1.0')
     implementation 'com.google.firebase:firebase-database'
     // Add the Firebase Crashlytics SDK.
-    implementation 'com.google.firebase:firebase-crashlytics:18.0.0'
+    //implementation 'com.google.firebase:firebase-crashlytics:18.0.0'
     implementation 'me.piruin:quickaction:2.4.3'
+
     apply plugin: 'realm-android'
-    /*apply plugin: 'io.fabric'
-    implementation('com.crashlytics.sdk.android:crashlytics:17.2.2@aar') {
-        transitive = true;
-    }*/
+    apply plugin: 'com.google.firebase.crashlytics'
+
+    // Import the BoM for the Firebase platform
+    implementation platform('com.google.firebase:firebase-bom:28.2.0')
+
+    // Declare the dependencies for the Crashlytics and Analytics libraries
+    // When using the BoM, you don't specify versions in Firebase library dependencies
+    implementation 'com.google.firebase:firebase-crashlytics'
+    implementation 'com.google.firebase:firebase-analytics'
     realm {
         syncEnabled = true
     }

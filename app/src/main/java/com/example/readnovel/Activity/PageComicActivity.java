@@ -22,6 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
@@ -44,8 +45,12 @@ import com.example.readnovel.Model.Comic;
 import com.example.readnovel.Model.ComicDatabase;
 import com.example.readnovel.Model.ComicFirebase;
 import com.example.readnovel.R;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -160,7 +165,7 @@ public class PageComicActivity extends AppCompatActivity implements View.OnClick
 
      private void addFirebase() {
         mDatabase = FirebaseDatabase.getInstance().getReference();
-        mDatabase.child(title).setValue(lstChapNormal);
+        mDatabase.child(title).setValue(lstChapter);
     }
 
     private void handleQuickAction() {
@@ -171,7 +176,7 @@ public class PageComicActivity extends AppCompatActivity implements View.OnClick
         quickAction = new QuickAction(this,QuickAction.HORIZONTAL);
         quickAction.setColorRes(R.color.darkPink);
         quickAction.setTextColorRes(R.color.white);
-        String title = txtFindChap.getText().toString();
+
 
         ActionItem desItem = new ActionItem(1,"Đi đến >>",R.drawable.comic);
 
@@ -192,6 +197,30 @@ public class PageComicActivity extends AppCompatActivity implements View.OnClick
     }
     //Find Chap o day ne
     private void onPressFindChapter() {
+        String number = txtFindChap.getText().toString();
+        int i = Integer.parseInt(number) - 1;
+
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        Query chapter = mDatabase.child(title).child(String.valueOf(i));
+        Log.d("chapter", chapter.toString());
+
+        chapter.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+               Chapter chap = snapshot.getValue(Chapter.class);
+               String url = chap.getUrl();
+               loadBookmark();
+               Intent intent = new Intent(PageComicActivity.this, DetailComicActivity.class);
+               intent.putExtra("url", url);
+               startActivity(intent);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
     }
 
 

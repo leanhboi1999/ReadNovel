@@ -71,7 +71,7 @@ public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.ViewHold
         boolean check = false;
         RealmResults<BookmarkDatabase> result = _myRealm.where(BookmarkDatabase.class).findAll();
         for(BookmarkDatabase database : result) {
-            if(database.getName() != null) {
+            if(database.getName() != null && database.getName().equals(item.getName())) {
                 if(database.getChapter().equals(item.getChapter().trim())) {
                     check = true;
                     Bookmark temp = new Bookmark(database.getName(), database.getView(), database.getThumbal(), database.getChapter(), database.getLinkChapter());

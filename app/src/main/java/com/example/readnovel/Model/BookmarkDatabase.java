@@ -4,11 +4,11 @@ package com.example.readnovel.Model;
 import io.realm.RealmObject;
 
 public class BookmarkDatabase extends RealmObject {
-    private String name;
+    private String name; //Tên truyện
     private String view;
     private String thumbal;
-    private String chapter;
-    private String linkChapter;
+    private String chapter; //Tên chapter
+    private String linkChapter; //Link chapter
 
     public BookmarkDatabase(String name, String view, String thumbal, String chapter, String linkChapter) {
         this.name = name;
