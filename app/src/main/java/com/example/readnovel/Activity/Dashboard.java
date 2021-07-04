@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -77,9 +78,10 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
     private ArrayList<Comic> _listHottrend;
     private ArrayList<Comic> _listGirl;
     private ArrayList<Comic> _listBoy;
-    private ArrayList<Comic> listBookmark;
+    private ArrayList<Comic> listBookmark, listBMReverse;
     private List<SliderItem> sliderItems;
     private List<SliderItem> sliderItemsForVer;
+    private LinearLayout bookmarkLayout;
 //    private BannerSlider _sliderBanner;
     private ViewPager2 viewPager2;
     private SliderAdapter sliderAdapter;
@@ -133,15 +135,22 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
     }
 
     private void loadHistory() {
-        for (int i = bookmarks.size()-1;i>(bookmarks.size()-6);i--)
+        if (bookmarks.size()==0)
         {
-            Bookmark bookmark = bookmarks.get(i);
-            sliderItemsForVer.add(new SliderItem(bookmark.getThumbal(),bookmark.getName()));
-            verSlierAdapter.setUrl(bookmark.getLinkChapter());
-            verSlierAdapter.setItems(sliderItemsForVer);
-            verSlierAdapter.setName(bookmark.getName());
-            verSlierAdapter.notifyDataSetChanged();
+            bookmarkLayout.setVisibility(View.GONE);
         }
+        else
+        {
+            for (int i = 0; i<listBMReverse.size()-1; i++)
+            {
+
+            sliderItemsForVer.add(new SliderItem(listBMReverse.get(i).getThumbal(),listBMReverse.get(i).getName()));
+            verSlierAdapter.setUrl(listBMReverse.get(i).getLinkComic());
+            verSlierAdapter.setItems(sliderItemsForVer);
+            verSlierAdapter.setName(listBMReverse.get(i).getName());
+            verSlierAdapter.notifyDataSetChanged();
+
+            }}
 
 
     }
@@ -158,6 +167,12 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
                     database.getView(), database.getThumbal(), database.getChapter(), database.getLinkChapter()));
             listBookmark.add(new Comic(database.getName(),
                     database.getView(), database.getThumbal(), database.getChapter(), database.getLinkChapter()));
+            for (int i =listBookmark.size()-1;i>listBookmark.size()-6;i--)
+            {
+                if (i==-1)
+                    break;
+                listBMReverse.add(listBookmark.get(i));
+            }
 
         }
 
@@ -174,6 +189,7 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
         _urlBanner = new ArrayList<>();
         _search = new ArrayList<>();
         listBookmark = new ArrayList<>();
+        listBMReverse = new ArrayList<>();
         //Khởi tạo giao diện, bảo sao nó cứ null point mà không thấy báo lỗi
 
         //init Slider
@@ -181,7 +197,7 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
         sliderItems = new ArrayList<>();
         sliderItemsForVer = new ArrayList<>();
         sliderAdapter = new SliderAdapter(sliderItems, viewPager2, _listUpdate);
-        verSlierAdapter = new VerticalSliderAdapter(sliderItemsForVer,vpMarkComic,listBookmark);
+        verSlierAdapter = new VerticalSliderAdapter(sliderItemsForVer,vpMarkComic,listBMReverse);
         viewPager2.setAdapter(sliderAdapter);
         vpMarkComic.setAdapter(verSlierAdapter);
 
@@ -205,6 +221,7 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
         btnTruyenBoy.setOnClickListener(this);
         btnBXH = findViewById(R.id.btnBXH);
         btnBXH.setOnClickListener(this);
+        bookmarkLayout = findViewById(R.id.bookmarkLayout);
     }
 
     private void initSlider() {
@@ -291,6 +308,7 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
         else
         {
         vpMarkComic.setVisibility(View.VISIBLE);}
+
 
     }
 
@@ -393,7 +411,7 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
 //                            _banner.add(new RemoteBanner(thumbal));
 //                            _banner.get(i).setScaleType(ImageView.ScaleType.FIT_XY);
 //                            _urlBanner.add(url);
-
+                            Log.d("Ho",url);
                             sliderItems.add(new SliderItem(thumbal));
                             sliderAdapter.setUrl(url);
                             sliderAdapter.setItems(sliderItems);
