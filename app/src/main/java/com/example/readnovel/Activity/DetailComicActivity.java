@@ -2,11 +2,13 @@ package com.example.readnovel.Activity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -15,6 +17,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -38,14 +41,20 @@ import org.jsoup.select.Elements;
 
 import java.util.ArrayList;
 
+import me.piruin.quickaction.ActionItem;
+import me.piruin.quickaction.QuickAction;
+
 public class DetailComicActivity extends AppCompatActivity implements View.OnSystemUiVisibilityChangeListener, View.OnClickListener {
     private ArrayList<Image> lstImage;
     private ComicViewAdapter adapter;
     private RecyclerView mRvComic;
-    private ImageView imgPreChap, imgNextChap;
+    private ImageView imgPreChap;
+    private ImageView imgNextChap;
+    private ImageView imgBack,imgHelp;
     private TextView txtChapName;
     private GestureDetector gestureDetector;
-    private RelativeLayout rlChapter,rlChapterLayout;
+    private RelativeLayout rlChapter,rlChapterLayout,rlHeader;
+    private QuickAction quickAction;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +73,44 @@ public class DetailComicActivity extends AppCompatActivity implements View.OnSys
         onSystemUiVisibilityChange(2);
         onHandleChapterBehavior();
         onNextPrevButton();
+        onPressHelp();
+    }
+
+    private void onPressHelp() {
+        QuickAction.setDefaultColor(ResourcesCompat.getColor(getResources(),R.color.lightPink,null));
+        QuickAction.setDefaultTextColor(Color.WHITE);
+
+        quickAction = new QuickAction(this,QuickAction.VERTICAL);
+        quickAction.setColorRes(R.color.darkPink);
+        quickAction.setTextColorRes(R.color.white);
+
+
+        ActionItem helpItem = new ActionItem(1,"Help",R.drawable.exclamation);
+        ActionItem reportItem = new ActionItem(2,"Report",R.drawable.alert);
+
+
+        quickAction.addActionItem(helpItem);
+        quickAction.addActionItem(reportItem);
+        imgHelp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                quickAction.show(view);
+            }
+        });
+        quickAction.setOnActionItemClickListener(new QuickAction.OnActionItemClickListener() {
+            @Override
+            public void onItemClick(ActionItem item) {
+                if (item.getActionId()==1)
+                {
+
+                }
+                else if (item.getActionId()==2)
+                {
+
+                }
+            }
+        });
+
     }
 
     private void onNextPrevButton() {
@@ -79,12 +126,13 @@ public class DetailComicActivity extends AppCompatActivity implements View.OnSys
 
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
-                if (dy > 0 && rlChapter.isShown()) {
+                if (dy > 0 && rlChapter.isShown() &&rlHeader.isShown()) {
                     rlChapter.setVisibility(View.GONE);
+                    rlHeader.setVisibility(View.GONE);
                 }
                 else if (dy < 0 ) {
                     rlChapter.setVisibility(View.VISIBLE);
-
+                    rlHeader.setVisibility(View.VISIBLE);
                 }
 
             }
@@ -191,7 +239,9 @@ public class DetailComicActivity extends AppCompatActivity implements View.OnSys
         txtChapName = findViewById(R.id.txtChapName);
         rlChapter = findViewById(R.id.rlChapter);
         rlChapterLayout = findViewById(R.id.rlChapterLayout);
-
+        imgBack = findViewById(R.id.imgBack);
+        imgHelp = findViewById(R.id.imgHelp);
+        rlHeader = findViewById(R.id.rlHeader);
     }
 
     @Override

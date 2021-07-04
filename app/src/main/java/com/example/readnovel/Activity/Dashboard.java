@@ -36,6 +36,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.readnovel.Adapter.ComicAdapter;
 import com.example.readnovel.Adapter.SearchAdapter;
 import com.example.readnovel.Adapter.SliderAdapter;
+import com.example.readnovel.Adapter.VerticalSliderAdapter;
 import com.example.readnovel.Model.Bookmark;
 import com.example.readnovel.Model.BookmarkDatabase;
 import com.example.readnovel.Model.Comic;
@@ -68,7 +69,7 @@ import ss.com.bannerslider.views.BannerSlider;
 
 public class Dashboard extends AppCompatActivity implements View.OnClickListener, TextWatcher {
     //Khai báo view
-    Button btnBXH, btnFavorite, btnTheloai, btnNewUpdate, btnHotTrend, btnTruyenGirl, btnTruyenBoy;
+    Button btnBXH, btnFavorite, btnTheloai, btnNewUpdate, btnHotTrend, btnTruyenGirl, btnTruyenBoy, btnMarkComic;
     TextView text;
     //Khai báo model lưu data
     private ArrayList<Comic> _listUpdate;
@@ -76,11 +77,13 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
     private ArrayList<Comic> _listGirl;
     private ArrayList<Comic> _listBoy;
     private List<SliderItem> sliderItems;
-    //
+
 //    private BannerSlider _sliderBanner;
     private ViewPager2 viewPager2;
     private SliderAdapter sliderAdapter;
     private Handler sliderHandler = new Handler();
+    private ViewPager2 vpMarkComic;
+    private VerticalSliderAdapter verSlierAdapter;
 
     private ArrayList<String> _urlBanner;
     private ArrayList<Search> _search;
@@ -151,9 +154,12 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
         initSlider();
         sliderItems = new ArrayList<>();
         sliderAdapter = new SliderAdapter(sliderItems, viewPager2, _listUpdate);
+        verSlierAdapter = new VerticalSliderAdapter(sliderItems,vpMarkComic,_listUpdate);
         viewPager2.setAdapter(sliderAdapter);
+        vpMarkComic.setAdapter(verSlierAdapter);
 
-
+        btnMarkComic = findViewById(R.id.btnMarkComic);
+        btnMarkComic.setOnClickListener(this);
         _newUpdate = findViewById(R.id.NewUpdate);
         _hotTrend = findViewById(R.id.HotTrend);
         _Boy = findViewById(R.id.Boy);
@@ -200,6 +206,21 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
             }
         });
 
+        vpMarkComic = findViewById(R.id.vpMarkComic);
+        vpMarkComic.setClickable(false);
+        vpMarkComic.setClipChildren(false);
+        vpMarkComic.setOffscreenPageLimit(3);
+        vpMarkComic.getChildAt(0).setOverScrollMode(RecyclerView.OVER_SCROLL_NEVER);
+        vpMarkComic.setCurrentItem(2);
+        vpMarkComic.setPageTransformer(compositePageTransformer);
+        vpMarkComic.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+            @Override
+            public void onPageSelected(int position) {
+                super.onPageSelected(position);
+                sliderHandler.removeCallbacks(sliderRunnable);
+                sliderHandler.postDelayed(sliderRunnable, 1800);
+            }
+        });
     }
 
 
@@ -228,9 +249,21 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
             case R.id.btnTruyenBoy:
                 openTruyenBoy(more);
                 break;
+            case R.id.btnMarkComic:
+                openViewPager();
             default:
                 break;
         }
+    }
+
+    private void openViewPager() {
+        if (vpMarkComic.isShown())
+        {
+            vpMarkComic.setVisibility(View.GONE);
+        }
+        else
+        {
+        vpMarkComic.setVisibility(View.VISIBLE);}
     }
 
     private void openTheLoai() {
@@ -337,6 +370,14 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
                             sliderAdapter.setUrl(url);
                             sliderAdapter.setItems(sliderItems);
                             sliderAdapter.notifyDataSetChanged();
+
+
+                            verSlierAdapter.setUrl(url);
+                            verSlierAdapter.setItems(sliderItems);
+                            verSlierAdapter.notifyDataSetChanged();
+                            verSlierAdapter.setName("Hiii");
+                            //
+
                         }
 
                         _newUpdate.post(new Runnable() {
@@ -374,6 +415,7 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
         @Override
         public void run() {
             viewPager2.setCurrentItem(viewPager2.getCurrentItem() + 1);
+            vpMarkComic.setCurrentItem(vpMarkComic.getCurrentItem() + 1);
         }
     };
 
