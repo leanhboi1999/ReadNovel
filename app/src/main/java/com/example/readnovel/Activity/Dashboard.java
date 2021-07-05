@@ -143,12 +143,13 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
         {
             for (int i = 0; i<listBMReverse.size()-1; i++)
             {
-
+                if (i<5)
+                {
             sliderItemsForVer.add(new SliderItem(listBMReverse.get(i).getThumbal(),listBMReverse.get(i).getName()));
             verSlierAdapter.setUrl(listBMReverse.get(i).getLinkComic());
             verSlierAdapter.setItems(sliderItemsForVer);
             verSlierAdapter.setName(listBMReverse.get(i).getName());
-            verSlierAdapter.notifyDataSetChanged();
+            verSlierAdapter.notifyDataSetChanged();}
 
             }}
 

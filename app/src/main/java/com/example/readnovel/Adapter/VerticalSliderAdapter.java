@@ -81,9 +81,9 @@ public class VerticalSliderAdapter extends RecyclerView.Adapter<VerticalSliderAd
         ArrayList<Comic> list = new ArrayList<>();
 
         holder.setImageView(sliderItem.get(position));
-        for (int i=0;i<listBookmark.size(); i++)
+        for (int i=0;i<listBookmark.size()-1; i++)
         {
-            if (i<listBookmark.size()) {
+            if (i<5) {
                 list.add(listBookmark.get(i));
             }
             else break;
@@ -91,7 +91,6 @@ public class VerticalSliderAdapter extends RecyclerView.Adapter<VerticalSliderAd
 
 
         Comic item = list.get(position);
-
 
         holder.txtBookmark.setText(item.getName());
 

@@ -12,7 +12,7 @@
 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="35dp"
         android:background="@drawable/button_background"
         android:onClick="login"
         android:text="Đăng nhập"
@@ -44,7 +44,7 @@
         android:id="@+id/username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="60dp"
 
         android:background="@drawable/rounded_border_button"
         android:backgroundTint="@color/white"
