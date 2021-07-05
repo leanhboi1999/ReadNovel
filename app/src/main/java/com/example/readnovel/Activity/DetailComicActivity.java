@@ -180,13 +180,8 @@ public class DetailComicActivity extends AppCompatActivity implements View.OnSys
                             lstImage.add(new Image(url));
                         }
                         Elements navigation = document.select("div.chapter-nav");
-                        Log.d("test", navigation.toString());
-                        Element next = navigation.select("a").get(4);
-                        String urlNext = next.attr("href");
-                        Element prev = navigation.select("a").get(3);
-                        String urlPrev = prev.attr("href");
-                        Log.d("test", urlNext);
-                        Log.d("test", urlPrev);
+                        Element back = navigation.select("a").get(1);
+                        urlBack = back.attr("href");
                         mRvComic.post(new Runnable() {
                             @Override
                             public void run() {
