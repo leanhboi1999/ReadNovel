@@ -114,7 +114,16 @@ public class DetailComicActivity extends AppCompatActivity implements View.OnSys
                 }
                 else if (item.getActionId()==2)
                 {
+                    Intent intentSend = new Intent(android.content.Intent.ACTION_SEND);
+                    String text = "Xin cảm ơn đã liên hệ với RECO support team. Bạn hãy cung cấp đầy đủ thông tin sau:\n"+
+                            "Tên truyện: \n" + "Chapter: \n" + "Vấn đề: ";
+                    String subject = "Report tới RECO support ";
+                    intentSend.putExtra(android.content.Intent.EXTRA_EMAIL,new String[]{"recosupportteam@gmail.com"});
+                    intentSend.putExtra(android.content.Intent.EXTRA_SUBJECT,subject);
+                    intentSend.putExtra(android.content.Intent.EXTRA_TEXT,text);
 
+                    intentSend.setType("plain/text");
+                    startActivity(Intent.createChooser(intentSend,"Choose your email client: "));
                 }
             }
         });

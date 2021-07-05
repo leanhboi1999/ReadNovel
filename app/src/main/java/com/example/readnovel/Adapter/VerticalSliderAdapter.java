@@ -16,6 +16,7 @@ import com.bumptech.glide.Priority;
 import com.bumptech.glide.load.DecodeFormat;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
+import com.example.readnovel.Activity.DetailComicActivity;
 import com.example.readnovel.Activity.PageComicActivity;
 import com.example.readnovel.Model.Comic;
 import com.example.readnovel.Model.SliderItem;
@@ -34,6 +35,7 @@ public class VerticalSliderAdapter extends RecyclerView.Adapter<VerticalSliderAd
     private final ArrayList<Comic> listBookmark;
     private String Url;
     private String Name;
+
 
     public String getUrl() {
         return Url;
@@ -76,27 +78,31 @@ public class VerticalSliderAdapter extends RecyclerView.Adapter<VerticalSliderAd
 
     @Override
     public void onBindViewHolder(@NonNull SliderViewHolder holder, int position) {
+        ArrayList<Comic> list = new ArrayList<>();
+
         holder.setImageView(sliderItem.get(position));
-//        holder.txtBookmark.setText(item.getName());
-        if (position == sliderItem.size() - 2)
+        for (int i=0;i<listBookmark.size()-1; i++)
         {
-            viewPager2.post(runnable);
+            if (i<5) {
+                list.add(listBookmark.get(i));
+            }
+            else break;
         }
+
+
+        Comic item = list.get(position);
+
+        holder.txtBookmark.setText(item.getName());
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ArrayList<Comic> list = new ArrayList<>();
-                for (int i= listBookmark.size()-1 ;i>(listBookmark.size()-6); i--)
-                {
-                    list.add(listBookmark.get(i));
-                }
-                final Comic item = list.get(position);
-                Intent intent = new Intent(context, PageComicActivity.class);
+                Intent intent = new Intent(context, DetailComicActivity.class);
                 intent.putExtra("url", item.getLinkComic());
-
                 context.startActivity(intent);
             }
         });
+
     }
 
     @Override
@@ -143,4 +149,5 @@ public class VerticalSliderAdapter extends RecyclerView.Adapter<VerticalSliderAd
             notifyDataSetChanged();
         }
     };
+
 }

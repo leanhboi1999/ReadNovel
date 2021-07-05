@@ -75,12 +75,19 @@ public class SliderAdapter extends RecyclerView.Adapter<SliderAdapter.SliderView
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final Comic item = listUpdate.get(position);
+                ArrayList<Comic> list = new ArrayList<>();
                 Intent intent = new Intent(context, PageComicActivity.class);
                 for (int i = 0; i < 10; i++) {
-                    intent.putExtra("url", item.getLinkComic());
+                    list.add(listUpdate.get(i));
                 }
-                    context.startActivity(intent);
+                int pos = position;
+                if (pos>=10)
+                {
+                    pos=pos%10;
+                }
+                final Comic item = list.get(pos);
+                intent.putExtra("url", item.getLinkComic());
+                context.startActivity(intent);
             }
         });
     }
